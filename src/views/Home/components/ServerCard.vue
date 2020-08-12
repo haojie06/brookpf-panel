@@ -3,9 +3,9 @@
   <el-card class="server-card">
     <el-divider content-position="left">中转服务器列表</el-divider>
     <el-table :data="servers" style="width: 100%">
-      <el-table-column label="#">
+      <el-table-column label="ID">
         <template slot-scope="scope">
-          <i class="el-icon-time"></i>
+          <i class="el-icon-arrow-right"></i>
           <span style="margin-left: 10px">{{ scope.row.ID }}</span>
         </template>
       </el-table-column>
@@ -19,7 +19,11 @@
           <span>{{ scope.row.IP }}:{{ scope.row.Port }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="状态"></el-table-column>
+      <el-table-column label="状态">
+        <template slot-scope="scope">
+          <span>{{ scope.row.Status }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="备注">
         <template slot-scope="scope">
           <span>{{ scope.row.Desc }}</span>
@@ -32,7 +36,7 @@
               type="primary"
               @click="handleEdit(scope.$index, scope.row)"
             >
-              更多菜单<i class="el-icon-arrow-down el-icon--right"></i>
+              更多操作<i class="el-icon-arrow-down el-icon--right"></i>
             </el-button>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>test</el-dropdown-item>
@@ -52,8 +56,16 @@ export default {
   name: 'ServerCard',
   props: ['servers'],
   data() {
-    return {}
+    return {
+      index: 0,
+    }
   },
+  methods: {
+    getRowKeys(row) {
+      return row.individualId // 每条数据的唯一识别值
+    },
+  },
+  computed: {},
 }
 </script>
 <style>

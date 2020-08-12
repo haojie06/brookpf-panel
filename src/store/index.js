@@ -21,6 +21,10 @@ export default new Vuex.Store({
         `用户登录，提交至store u:${state.username} p:${state.password}`
       )
     },
+    updateServers(state, servers) {
+      state.servers = servers
+      console.log('STORE:更新服务器列表')
+    },
   },
   actions: {},
   modules: {},
