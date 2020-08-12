@@ -56,16 +56,34 @@ export default {
       this.$axios
         .post('/web/login', params)
         .then((successResponse) => {
-          console.log('登陆成功')
           if (successResponse.data.Code === 200) {
+            console.log('登陆成功')
             this.$router.replace({ path: '/' })
+            this.$store.commit('login', {
+              username: this.loginForm.username,
+              password: this.loginForm.password,
+            })
+            this.$notify({
+              title: '登录成功',
+              message: '欢迎回来',
+              type: 'success',
+            })
           } else {
             console.log(
               '登陆失败\n' + JSON.stringify(successResponse.data.Code)
             )
+            this.$notify.error({
+              title: '错误',
+              message: '登陆失败 请检测用户名/密码是否正确',
+            })
           }
         })
-        .catch(() => {})
+        .catch((err) => {
+          this.$notify.error({
+            title: '错误',
+            message: '登陆失败' + JSON.stringify(err),
+          })
+        })
     },
   },
 }

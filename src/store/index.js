@@ -7,11 +7,19 @@ export default new Vuex.Store({
   state: {
     login: false,
     username: '',
+    password: '',
+    lastOP: 0,
+    servers: [],
+    portforwards: [],
   },
   mutations: {
-    login(state, username) {
+    login(state, payload) {
       state.login = true
-      state.username = username
+      state.username = payload.username
+      state.password = payload.password
+      console.log(
+        `用户登录，提交至store u:${state.username} p:${state.password}`
+      )
     },
   },
   actions: {},

@@ -5,7 +5,7 @@
     </el-header>
     <el-main class="page-main">
       <OperationBar />
-      <ServerCard />
+      <ServerCard :servers="servers" />
       <ForwardCard />
     </el-main>
     <el-footer>Footer</el-footer>
@@ -25,8 +25,51 @@ export default {
     return {
       circleUrl: '../assets/images/avatars/profile-image-1.jpg',
       iconUrl: require('@/assets/images/avatars/profile-image-1.jpg'),
+      servers: [],
     }
   },
+  beforeMount: function() {
+    //打开页面，首先检测是否登录，如果没有登录，先让用户去登陆 考虑是否设置过期时间？
+    if (this.$store.state.username == '') {
+      //未检测到登录信息
+      this.$router.replace({ path: '/login' })
+    }
+    //如果过期，重登
+    /*
+    let now = Date.parse(new Date())
+    let lastOP = this.$store.state.lastOP
+    if ((now - lastOP) / 1000 > 20) {
+      this.$notify.this.$router.replace({ path: '/login' })
+      this.$notify({
+        title: '过期了',
+        message: '登录过期，请重新登录',
+        type: 'warn',
+      })
+    }
+    */
+    //如果密码修改 重登
+
+    //请求网页后端获取服务器列表
+    const fdata = new FormData()
+    fdata.append('Username', this.$store.state.username)
+    fdata.append('Password', this.$store.state.password)
+    this.$axios
+      .post('/web/getservers', fdata)
+      .then((response) => {
+        if (response.data.Code == 200) {
+          console.log('查询成功:\n' + JSON.stringify(response))
+          this.servers = response.data.Data.servers
+          //this.$store.commit()
+        } else {
+          console.log('查询失败:\n' + JSON.stringify(response))
+        }
+      })
+      .catch((err) => {
+        console.log('获取列表出错' + JSON.stringify(err))
+      })
+    //逐一请求服务器获取状态以及中转列表
+  },
+  method() {},
 }
 </script>
 <style>

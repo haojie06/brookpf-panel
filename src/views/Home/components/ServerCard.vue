@@ -1,35 +1,47 @@
 <!--中转服务器列表-->
 <template>
   <el-card class="server-card">
-    <el-table :data="tableData" style="width: 100%">
-      <el-table-column label="日期" width="180">
+    <el-divider content-position="left">中转服务器列表</el-divider>
+    <el-table :data="servers" style="width: 100%">
+      <el-table-column label="#">
         <template slot-scope="scope">
           <i class="el-icon-time"></i>
-          <span style="margin-left: 10px">{{ scope.row.date }}</span>
+          <span style="margin-left: 10px">{{ scope.row.ID }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="姓名" width="180">
+      <el-table-column label="服务器名">
         <template slot-scope="scope">
-          <el-popover trigger="hover" placement="top">
-            <p>姓名: {{ scope.row.name }}</p>
-            <p>住址: {{ scope.row.address }}</p>
-            <div slot="reference" class="name-wrapper">
-              <el-tag size="medium">{{ scope.row.name }}</el-tag>
-            </div>
-          </el-popover>
+          <span>{{ scope.row.Name }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="中转服务器地址">
+        <template slot-scope="scope">
+          <span>{{ scope.row.IP }}:{{ scope.row.Port }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="状态"></el-table-column>
+      <el-table-column label="备注">
+        <template slot-scope="scope">
+          <span>{{ scope.row.Desc }}</span>
         </template>
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
-            >编辑</el-button
-          >
-          <el-button
-            size="mini"
-            type="danger"
-            @click="handleDelete(scope.$index, scope.row)"
-            >删除</el-button
-          >
+          <el-dropdown>
+            <el-button
+              type="primary"
+              @click="handleEdit(scope.$index, scope.row)"
+            >
+              更多菜单<i class="el-icon-arrow-down el-icon--right"></i>
+            </el-button>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item>test</el-dropdown-item>
+              <el-dropdown-item>狮子头</el-dropdown-item>
+              <el-dropdown-item>螺蛳粉</el-dropdown-item>
+              <el-dropdown-item>双皮奶</el-dropdown-item>
+              <el-dropdown-item>蚵仔煎</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
         </template>
       </el-table-column>
     </el-table>
@@ -38,31 +50,9 @@
 <script>
 export default {
   name: 'ServerCard',
+  props: ['servers'],
   data() {
-    return {
-      tableData: [
-        {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄',
-        },
-        {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄',
-        },
-        {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄',
-        },
-        {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄',
-        },
-      ],
-    }
+    return {}
   },
 }
 </script>
