@@ -4,9 +4,9 @@
     <el-divider content-position="left">中转记录列表</el-divider>
     <el-table :data="forwards" style="width: 100%">
       <el-table-column label="#" width="80">
-        <template>
+        <template slot-scope="scope">
           <i class="el-icon-time"></i>
-          <span style="margin-left: 10px">#</span>
+          <span style="margin-left: 10px">{{ scope.$index }}</span>
         </template>
       </el-table-column>
       <el-table-column label="中转服务器" width="140">

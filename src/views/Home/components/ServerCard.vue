@@ -31,19 +31,39 @@
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-dropdown>
-            <el-button
-              type="primary"
-              @click="handleEdit(scope.$index, scope.row)"
-            >
+          <el-dropdown @command="handleCommand">
+            <el-button type="primary" :key="scope.$row">
               更多操作<i class="el-icon-arrow-down el-icon--right"></i>
             </el-button>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>test</el-dropdown-item>
-              <el-dropdown-item>狮子头</el-dropdown-item>
-              <el-dropdown-item>螺蛳粉</el-dropdown-item>
-              <el-dropdown-item>双皮奶</el-dropdown-item>
-              <el-dropdown-item>蚵仔煎</el-dropdown-item>
+              <el-dropdown-item
+                :command="beforeHandleCommand(scope.$index, scope.row, 'edit')"
+                >编辑</el-dropdown-item
+              >
+              <el-dropdown-item
+                :command="
+                  beforeHandleCommand(scope.$index, scope.row, 'delete')
+                "
+                >删除</el-dropdown-item
+              >
+              <el-dropdown-item
+                :command="beforeHandleCommand(scope.$index, scope.row, 'start')"
+                >开启Brook</el-dropdown-item
+              >
+              <el-dropdown-item
+                :command="beforeHandleCommand(scope.$index, scope.row, 'stop')"
+                >关闭Brook</el-dropdown-item
+              >
+              <el-dropdown-item
+                :command="
+                  beforeHandleCommand(scope.$index, scope.row, 'restart')
+                "
+                >重启Brook</el-dropdown-item
+              >
+              <el-dropdown-item
+                :command="beforeHandleCommand(scope.$index, scope.row, 'print')"
+                >查看日志</el-dropdown-item
+              >
             </el-dropdown-menu>
           </el-dropdown>
         </template>
@@ -58,11 +78,78 @@ export default {
   data() {
     return {
       index: 0,
+      opServer: {},
     }
   },
   methods: {
     getRowKeys(row) {
       return row.individualId // 每条数据的唯一识别值
+    },
+    beforeHandleCommand(index, row, command) {
+      //点击按钮时先保存当前选中服务器信息，之后点击下拉框进行具体操作
+
+      return { index, row, command }
+    },
+    handleCommand(command) {
+      console.log(JSON.stringify(command))
+      //command.row即可取出对象
+      //command.command为操作
+      let server = command.row
+      switch (command.command) {
+        case 'delete':
+          //进行服务器删除
+          this.$confirm(
+            `确定要删除中转服务器${server.Name}吗？(服务器上的中转记录还会保留)`,
+            '提示',
+            {
+              confirmButtonText: '确定',
+              cancelButtonText: '取消',
+              type: 'warning',
+            }
+          )
+            .then(() => {
+              //确认进行删除
+              let formData = new FormData()
+              formData.append('Username', this.$store.state.username)
+              formData.append('Password', this.$store.state.password)
+              formData.append('ID', server.ID)
+              this.$axios
+                .post(
+                  this.$store.state.webServerUrl + '/web/delserver',
+                  formData
+                )
+                .then((response) => {
+                  console.log('删除服务器回应:\n' + JSON.stringify(response))
+                  if (response.data.Code == 200) {
+                    this.$message({
+                      type: 'success',
+                      message: '删除成功!',
+                    })
+                  } else {
+                    this.$message({
+                      type: 'error',
+                      message: '删除失败:' + JSON.stringify(response.data),
+                    })
+                  }
+                })
+                .catch((err) => {
+                  console.log('删除服务器回应:\n' + JSON.stringify(err))
+                  this.$message({
+                    type: 'error',
+                    message: '删除失败:' + JSON.stringify(err),
+                  })
+                })
+              //刷新页面
+              this.$router.go(0)
+            })
+            .catch(() => {
+              this.$message({
+                type: 'info',
+                message: '已取消删除',
+              })
+            })
+          break
+      }
     },
   },
   computed: {},
