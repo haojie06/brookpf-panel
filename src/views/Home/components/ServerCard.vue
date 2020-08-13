@@ -193,7 +193,7 @@ export default {
                   })
                 })
               //刷新页面
-              this.$router.go(0)
+              this.$common.getData(this)
             })
             .catch(() => {
               this.$message({
@@ -234,7 +234,7 @@ export default {
                 message: '启动Brook失败' + JSON.stringify(e),
               })
             })
-          this.$router.go(0)
+          this.$common.getData(this)
           break
         }
         case 'stop': {
@@ -263,7 +263,7 @@ export default {
                 message: '停止Brook失败' + JSON.stringify(e),
               })
             })
-          this.$router.go(0)
+          this.$common.getData(this)
           break
         }
         case 'restart': {
@@ -292,7 +292,7 @@ export default {
                 message: '重启Brook失败' + JSON.stringify(e),
               })
             })
-          this.$router.go(0)
+          this.$common.getData(this)
           break
         }
 
@@ -349,7 +349,7 @@ export default {
           })
         //更新
         this.dialogFormVisible = false
-        this.$router.go(0)
+        this.$common.getData(this)
       }
     },
   },

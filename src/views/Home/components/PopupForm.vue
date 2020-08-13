@@ -231,7 +231,7 @@ export default {
         //展示加载
         this.$store.commit('updateAddServerFormVisable', false)
         //刷新页面
-        this.$router.go(0)
+        this.$common.getData(this)
       }
     },
     confirmAddForward: function() {
