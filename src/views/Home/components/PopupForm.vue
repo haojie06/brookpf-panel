@@ -60,12 +60,90 @@
         <el-button type="primary" @click="confirmAddServer">确 定</el-button>
       </div>
     </el-dialog>
+
+    <!---添加中转表单-->
+    <el-dialog
+      class="add-server"
+      :show-close="false"
+      title="添加中转记录"
+      :visible.sync="this.$store.state.addForwardFormVisable"
+    >
+      <el-form :model="addServerForm">
+        <el-form-item label="中转名称" :label-width="formLabelWidth">
+          <el-input v-model="addForwardForm.name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="中转服务器" :label-width="formLabelWidth">
+          <el-row>
+            <el-col :span="18">
+              <el-select
+                v-model="addForwardForm.lserver"
+                placeholder="选择服务器"
+                style="display: block"
+                value-key="ID"
+                @change="onChange"
+              >
+                <el-option
+                  v-for="item in servers"
+                  :key="item.ID"
+                  :label="item.IP"
+                  :value="item"
+                >
+                  <span style="float: left">{{ item.IP }}</span>
+                  <span style="float: right; color: #8492a6; font-size: 13px">{{
+                    item.Name
+                  }}</span>
+                </el-option>
+              </el-select>
+            </el-col>
+            <el-col :span="2">:</el-col>
+            <el-col :span="4">
+              <el-input
+                v-model="addForwardForm.lport"
+                autocomplete="off"
+                placeholder="端口"
+              ></el-input>
+            </el-col>
+          </el-row>
+        </el-form-item>
+        <el-form-item label="被中转服务器" :label-width="formLabelWidth">
+          <el-row>
+            <el-col :span="14"
+              ><el-input
+                v-model="addForwardForm.host"
+                autocomplete="off"
+                placeholder="被中转服务器IP"
+              ></el-input>
+            </el-col>
+            <el-col :span="2">:</el-col>
+            <el-col :span="8"
+              ><el-input
+                v-model="addForwardForm.rport"
+                autocomplete="off"
+                placeholder="端口"
+              ></el-input
+            ></el-col>
+          </el-row>
+        </el-form-item>
+        <el-form-item label="描述" :label-width="formLabelWidth">
+          <el-input
+            type="textarea"
+            autocomplete="off"
+            v-model="addForwardForm.desc"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="cancelAddForward">取 消</el-button>
+        <el-button type="primary" @click="confirmAddForward">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 export default {
   name: 'PopupForm',
+  props: ['servers', 'forwards'],
   data() {
     return {
       addServerForm: {
@@ -76,13 +154,28 @@ export default {
         host: '127.0.0.1',
         port: '8080',
       },
+      addForwardForm: {
+        lport: '',
+        rport: '',
+        lserver: {},
+        host: '',
+        name: '',
+        desc: '',
+      },
       formLabelWidth: '100px',
     }
   },
   methods: {
+    onChange: function(e) {
+      console.log('选中' + JSON.stringify(e))
+      console.log('此时lserver' + JSON.stringify(this.addForwardForm.lserver))
+    },
     cancelAddServer: function() {
       //this.addServerFormVisable = true
       this.$store.commit('updateAddServerFormVisable', false)
+    },
+    cancelAddForward: function() {
+      this.$store.commit('updateAddForwardFormVisable', false)
     },
     confirmAddServer: function() {
       //先判断是否都填了
@@ -139,6 +232,47 @@ export default {
         this.$store.commit('updateAddServerFormVisable', false)
         //刷新页面
         this.$router.go(0)
+      }
+    },
+    confirmAddForward: function() {
+      console.log('确认提交中转记录')
+      //先确定所有的表单都填了
+      let completed = true
+      let lack = ''
+      for (let i in this.addForwardForm) {
+        if (this.addForwardForm[i] == '') {
+          completed = false
+          lack += i
+        }
+      }
+      if (completed) {
+        let formData = new FormData()
+        formData.append('Password', this.addForwardForm.lserver.Password)
+        formData.append('Username', this.addForwardForm.lserver.UserName)
+        formData.append('LocalPort', this.addForwardForm.lport)
+        formData.append('RemotePort', this.addForwardForm.rport)
+        formData.append('Host', this.addForwardForm.host)
+        formData.append('Description', this.addForwardForm.desc)
+        formData.append('Name', this.addForwardForm.name)
+        formData.append('Enable', 1)
+        this.$axios
+          .post(
+            `http://${this.addForwardForm.lserver.IP}:${this.addForwardForm.lserver.Port}/api/addpf`,
+            formData
+          )
+          .then((r) => {
+            console.log(JSON.stringify(r.data))
+          })
+          .catch((e) => {
+            console.log(JSON.stringify(e))
+          })
+        this.$store.commit('updateAddForwardFormVisable', false)
+        //this.$router.go(0)
+      } else {
+        this.$message({
+          type: 'warning',
+          message: '存在未填项' + lack,
+        })
       }
     },
   },

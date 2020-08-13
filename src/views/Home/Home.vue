@@ -7,7 +7,7 @@
       <OperationBar />
       <ServerCard :servers="servers" />
       <ForwardCard :forwards="forwards" />
-      <popup-form></popup-form>
+      <popup-form :servers="servers" :forwards="forwards"></popup-form>
     </el-main>
     <el-footer>Footer</el-footer>
   </el-container>

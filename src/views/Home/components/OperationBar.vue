@@ -11,7 +11,9 @@
     <el-col :span="6">
       <el-card class="op-card">
         <div class="op-tip">您可能需要以下操作</div>
-        <el-button type="primary" class="op-button">添加转发规则</el-button>
+        <el-button type="primary" class="op-button" @click="addForward"
+          >添加转发规则</el-button
+        >
       </el-card>
     </el-col>
     <el-col :span="6">
@@ -48,7 +50,7 @@ export default {
     },
     addForward: function() {
       //this.addForwardFormVisable = true
-      this.$store.commit('updateForwardFormVisable', true)
+      this.$store.commit('updateAddForwardFormVisable', true)
     },
   },
 }

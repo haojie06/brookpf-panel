@@ -234,6 +234,7 @@ export default {
                 message: '启动Brook失败' + JSON.stringify(e),
               })
             })
+          this.$router.go(0)
           break
         }
         case 'stop': {
@@ -262,6 +263,7 @@ export default {
                 message: '停止Brook失败' + JSON.stringify(e),
               })
             })
+          this.$router.go(0)
           break
         }
         case 'restart': {
@@ -290,6 +292,7 @@ export default {
                 message: '重启Brook失败' + JSON.stringify(e),
               })
             })
+          this.$router.go(0)
           break
         }
 
