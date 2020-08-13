@@ -7,6 +7,7 @@
       <OperationBar />
       <ServerCard :servers="servers" />
       <ForwardCard :forwards="forwards" />
+      <popup-form></popup-form>
     </el-main>
     <el-footer>Footer</el-footer>
   </el-container>
@@ -18,9 +19,10 @@ import ServerCard from './components/ServerCard.vue'
 import NavBar from './components/NavBar.vue'
 import ForwardCard from './components/ForwardCard.vue'
 import OperationBar from './components/OperationBar.vue'
+import PopupForm from './components/PopupForm.vue'
 export default {
   name: 'Home',
-  components: { ServerCard, NavBar, ForwardCard, OperationBar },
+  components: { ServerCard, NavBar, ForwardCard, OperationBar, PopupForm },
   data() {
     return {
       circleUrl: '../assets/images/avatars/profile-image-1.jpg',
@@ -58,22 +60,17 @@ export default {
       .post('/web/getservers', fdata)
       .then((response) => {
         if (response.data.Code == 200) {
-          console.log('查询成功:\n' + JSON.stringify(response))
+          //.log('查询成功:\n' + JSON.stringify(response))
           this.servers = response.data.Data.servers
           //this.$store.commit()
           //逐一请求服务器获取状态以及中转列表
           if (this.servers != []) {
-            console.log('遍历服务器')
             for (let i = 0; i < this.servers.length; i++) {
               //逐一请求。。并更新列表
               this.servers[i].Status = '查询中'
               //对象的属性是没有绑定的，所以需要促使数组变化
               this.servers.push([])
               this.servers.pop()
-
-              console.log(
-                `开始查询服务器ID:${this.servers[i].ID}--${this.servers[i].Name}`
-              )
               let fdata = new FormData()
               let server = this.servers[i]
               fdata.append('Username', this.servers[i].UserName)
@@ -121,16 +118,15 @@ export default {
                         forward.rname = '未命名'
                       }
                       this.forwards.push(forward)
-                      console.log('forwards追加' + JSON.stringify(forward))
                     }
                   }
                 })
-                .catch((err) => {
+                .catch(() => {
                   //如果连接不上服务器（显示离线）
                   this.servers[i].Status = '离线'
                   this.servers.push([])
                   this.servers.pop()
-                  console.log('查询服务器信息失败\n' + JSON.stringify(err))
+                  //console.log('查询服务器信息失败\n' + JSON.stringify(err))
                 })
             }
           } else {

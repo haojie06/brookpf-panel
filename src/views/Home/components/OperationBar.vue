@@ -3,7 +3,9 @@
     <el-col :span="6">
       <el-card class="op-card">
         <div class="op-tip">您可能需要以下操作</div>
-        <el-button type="primary" class="op-button">添加中转服务器</el-button>
+        <el-button type="primary" class="op-button" @click="addServer"
+          >添加中转服务器</el-button
+        >
       </el-card>
     </el-col>
     <el-col :span="6">
@@ -31,7 +33,23 @@
 export default {
   name: 'OperationBar',
   data() {
-    return {}
+    return {
+      addServerForm: {
+        name: '',
+        region: '',
+      },
+      addForwardForm: {},
+    }
+  },
+  methods: {
+    addServer: function() {
+      //this.addServerFormVisable = true
+      this.$store.commit('updateAddServerFormVisable', true)
+    },
+    addForward: function() {
+      //this.addForwardFormVisable = true
+      this.$store.commit('updateForwardFormVisable', true)
+    },
   },
 }
 </script>

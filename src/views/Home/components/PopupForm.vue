@@ -1,0 +1,154 @@
+<template>
+  <div>
+    <!--添加中转服务器表单-->
+    <el-dialog
+      class="add-server"
+      :show-close="false"
+      title="添加中转服务器"
+      :visible.sync="this.$store.state.addServerFormVisable"
+    >
+      <el-form :model="addServerForm">
+        <el-form-item label="服务器名称" :label-width="formLabelWidth">
+          <el-input v-model="addServerForm.name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="服务器地址" :label-width="formLabelWidth">
+          <el-row>
+            <el-col :span="14"
+              ><el-input
+                v-model="addServerForm.host"
+                autocomplete="off"
+                placeholder="服务器IP"
+              ></el-input>
+            </el-col>
+            <el-col :span="2">:</el-col>
+            <el-col :span="8"
+              ><el-input
+                v-model="addServerForm.port"
+                autocomplete="off"
+                placeholder="端口"
+              ></el-input
+            ></el-col>
+          </el-row>
+        </el-form-item>
+
+        <el-form-item label="服务器用户名" :label-width="formLabelWidth">
+          <el-input
+            v-model="addServerForm.username"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="服务器密码" :label-width="formLabelWidth">
+          <el-input
+            v-model="addServerForm.password"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item
+          label="描述"
+          :label-width="formLabelWidth"
+          v-model="addServerForm.desc"
+        >
+          <el-input
+            type="textarea"
+            v-model="addServerForm.desc"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="cancelAddServer">取 消</el-button>
+        <el-button type="primary" @click="confirmAddServer">确 定</el-button>
+      </div>
+    </el-dialog>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'PopupForm',
+  data() {
+    return {
+      addServerForm: {
+        name: '测试服务器',
+        desc: '用于测试',
+        username: 'haojie',
+        password: 'haojie06',
+        host: '127.0.0.1',
+        port: '8080',
+      },
+      formLabelWidth: '100px',
+    }
+  },
+  methods: {
+    cancelAddServer: function() {
+      //this.addServerFormVisable = true
+      this.$store.commit('updateAddServerFormVisable', false)
+    },
+    confirmAddServer: function() {
+      //先判断是否都填了
+      let completed = true
+      for (let i in this.addServerForm) {
+        if (i != 'desc' && this.addServerForm[i] == '') {
+          completed = false
+        }
+      }
+      if (!completed) {
+        this.$notify({
+          title: '表单不完整',
+          message: '表单不完整，无法提交',
+          type: 'warning',
+        })
+      } else {
+        //axios添加
+        let formData = new FormData()
+        formData.append('Username', this.$store.state.username)
+        formData.append('Password', this.$store.state.password)
+        formData.append('ServerUser', this.addServerForm.username)
+        formData.append('ServerPassword', this.addServerForm.password)
+        formData.append('Name', this.addServerForm.name)
+        formData.append('IP', this.addServerForm.host)
+        formData.append('Port', this.addServerForm.port)
+        formData.append('Desc', this.addServerForm.desc)
+        this.$axios
+          .post(this.$store.state.webServerUrl + '/web/addserver', formData)
+          .then((response) => {
+            console.log('提交表单回应\n' + JSON.stringify(response))
+            if (response.data.Code == 200) {
+              this.$notify({
+                title: '成功添加',
+                message: '成功添加中转服务器',
+                type: 'success',
+              })
+            } else {
+              this.$notify({
+                title: '添加失败',
+                message: '添加中转服务器失败\n' + JSON.stringify(response.data),
+                type: 'error',
+              })
+            }
+          })
+          .catch((err) => {
+            console.log('提交表单出错\n' + JSON.stringify(err))
+            this.$notify({
+              title: '添加失败',
+              message: '添加中转服务器失败\n' + JSON.stringify(err),
+              type: 'error',
+            })
+          })
+        //展示加载
+        this.$store.commit('updateAddServerFormVisable', false)
+        //刷新页面
+        this.$router.go(0)
+      }
+    },
+  },
+}
+</script>
+
+<style scoped>
+.add-server {
+}
+.el-form-item-dev {
+  text-align: left;
+}
+</style>

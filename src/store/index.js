@@ -11,6 +11,9 @@ export default new Vuex.Store({
     lastOP: 0,
     servers: [],
     portforwards: [],
+    addServerFormVisable: false,
+    addForwardFormVisable: false,
+    webServerUrl: 'http://ru.better06.xyz:8001',
   },
   mutations: {
     login(state, payload) {
@@ -20,6 +23,15 @@ export default new Vuex.Store({
       console.log(
         `用户登录，提交至store u:${state.username} p:${state.password}`
       )
+    },
+    updateAddServerFormVisable(state, visable) {
+      //更新表单可见性
+      console.log('更新表单可见性')
+      state.addServerFormVisable = visable
+    },
+    updateAddForwardFormVisable(state, visable) {
+      //更新表单可见性
+      state.addForwardFormVisable = visable
     },
     updateServers(state, servers) {
       state.servers = servers

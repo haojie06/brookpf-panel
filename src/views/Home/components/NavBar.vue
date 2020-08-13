@@ -1,29 +1,31 @@
 <template>
-  <nav class="navbar">
-    <el-row>
-      <el-col :span="16" class="logo-col nav-col">
-        <div class="logo-box">
-          <a href="仪表盘.html" class="logo-text">BROOKWEB</a>
-        </div>
-      </el-col>
-      <el-col :span="8" class="right-col nav-col">
-        <div class="header-button-box">
-          <el-avatar class="avatar" :size="40" :src="iconUrl"></el-avatar>
-          <el-dropdown>
-            <span class="el-dropdown-link">
-              <i class="el-icon-s-fold drop-icon"></i>
-            </span>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>添加中转服务器</el-dropdown-item>
-              <el-dropdown-item>添加转发规则</el-dropdown-item>
-              <el-dropdown-item>重启Brook</el-dropdown-item>
-              <el-dropdown-item disabled>停止Brook</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </div>
-      </el-col>
-    </el-row>
-  </nav>
+  <div>
+    <nav class="navbar">
+      <el-row>
+        <el-col :span="16" class="logo-col nav-col">
+          <div class="logo-box">
+            <a href="/" class="logo-text">BROOKWEB</a>
+          </div>
+        </el-col>
+        <el-col :span="8" class="right-col nav-col">
+          <div class="header-button-box">
+            <el-avatar class="avatar" :size="40" :src="iconUrl"></el-avatar>
+            <el-dropdown>
+              <span class="el-dropdown-link">
+                <i class="el-icon-s-fold drop-icon"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>添加中转服务器</el-dropdown-item>
+                <el-dropdown-item>添加转发规则</el-dropdown-item>
+                <el-dropdown-item>重启Brook</el-dropdown-item>
+                <el-dropdown-item disabled>停止Brook</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
+        </el-col>
+      </el-row>
+    </nav>
+  </div>
 </template>
 <script>
 export default {
@@ -33,6 +35,7 @@ export default {
       iconUrl: require('@/assets/images/avatars/profile-image-1.jpg'),
     }
   },
+  methods: {},
 }
 </script>
 <style>
