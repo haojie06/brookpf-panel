@@ -12,7 +12,13 @@ export default {
           //.log('查询成功:\n' + JSON.stringify(response))
           let servers = response.data.Data.servers
           for (let i in servers) {
+            //servers[i] 默认没有Status等属性，如果先提交，那么新加入的属性变化无法被追踪，所以在第一次提交前先把属性加进去
             servers[i].Status = '查询中'
+            //Brook状态
+            servers[i].BStatus = '未知'
+            //Brook是否安装
+            servers[i].Installed = false
+            servers[i].Online = false
           }
           vue.$store.commit('updateServers', servers)
           //vue.$store.commit()
@@ -36,7 +42,13 @@ export default {
                   )
                   if (response.data.Code == 200) {
                     //成功发送到服务器，并正常回应
+                    console.log(
+                      '查询到的服务器\n' + JSON.stringify(response.data)
+                    )
                     servers[i].Status = '在线'
+                    servers[i].Online = true
+                    servers[i].BStatus = response.data.Enable
+                    servers[i].Installed = response.data.Installed
                     //vue.$store.commit('updateServers', [])
                     //vue.$store.commit('updateServers', servers)
                     //vue.$store.commit('updateServers', vue.servers)

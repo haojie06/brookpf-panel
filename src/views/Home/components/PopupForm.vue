@@ -87,6 +87,7 @@
                   :key="item.ID"
                   :label="item.IP"
                   :value="item"
+                  :disabled="!item.Online || !item.Installed"
                 >
                   <span style="float: left">{{ item.IP }}</span>
                   <span style="float: right; color: #8492a6; font-size: 13px">{{
