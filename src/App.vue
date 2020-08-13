@@ -48,6 +48,7 @@ export default {
 }
 
 body {
+  font-size: 62.5%; /*  公式16px*62.5%=10px  1em=10px */
   margin: 0px;
 }
 

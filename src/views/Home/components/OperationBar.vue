@@ -61,6 +61,7 @@ export default {
   margin-top: 5%;
 }
 .op-card {
+  font-size: 150%;
   border-radius: 0.5rem !important;
   background-clip: padding-box;
   background: #fff;

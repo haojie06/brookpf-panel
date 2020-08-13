@@ -6,7 +6,6 @@ import Vuex from 'vuex'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'element-ui/lib/theme-chalk/display.css'
-
 import common from '@/assets/js/common.js'
 
 Vue.config.productionTip = false

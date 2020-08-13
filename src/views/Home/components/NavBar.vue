@@ -10,7 +10,7 @@
         <el-col :span="8" class="right-col nav-col">
           <div class="header-button-box">
             <el-avatar class="avatar" :size="40" :src="iconUrl"></el-avatar>
-            <el-dropdown>
+            <el-dropdown class="nav-dropdown">
               <span class="el-dropdown-link">
                 <i class="el-icon-s-fold drop-icon"></i>
               </span>
@@ -59,6 +59,7 @@ export default {
   transition: all 0.2s ease-in-out;
 }
 .navbar {
+  font-size: 150%;
   background: #7168fc !important;
   box-shadow: 0 0 0.7rem rgba(31, 45, 61, 0.3);
   position: fixed;
@@ -77,11 +78,13 @@ export default {
 .avatar {
   margin-left: 15px;
 }
+.nav-dropdown {
+  top: -0.5rem;
+  padding: 0.5rem;
+}
 .drop-icon {
   font-size: 1.8em;
   color: whitesmoke;
-  margin-left: 15px;
-  top: -5px;
 }
 .logo-box {
   display: inline-block;

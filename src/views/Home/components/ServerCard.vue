@@ -1,5 +1,6 @@
 <!--中转服务器列表-->
 <template>
+  <!--编辑中转服务器对话框-->
   <el-card class="server-card">
     <el-dialog title="编辑服务器" :visible.sync="dialogFormVisible">
       <el-form :model="editServerForm">
@@ -51,38 +52,45 @@
         <el-button type="primary" @click="commitEdit">确 定</el-button>
       </div>
     </el-dialog>
+    <!--中转服务器表格-->
     <el-divider content-position="left">中转服务器列表</el-divider>
-    <el-table :data="servers" style="width: 100%">
-      <el-table-column label="ID">
+    <el-table :data="servers">
+      <el-table-column label="ID" width="100">
         <template slot-scope="scope">
           <i class="el-icon-arrow-right"></i>
           <span style="margin-left: 10px">{{ scope.row.ID }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="服务器名">
+      <el-table-column label="服务器名" width="180">
         <template slot-scope="scope">
           <span>{{ scope.row.Name }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="中转服务器地址">
+      <el-table-column label="中转服务器地址" width="210">
         <template slot-scope="scope">
           <span>{{ scope.row.IP }}:{{ scope.row.Port }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="状态">
+      <el-table-column label="状态" width="100">
         <template slot-scope="scope">
-          <span>{{ scope.row.Status }}</span>
+          <el-popover trigger="hover" placement="top">
+            <p>Brook是否安装: {{ scope.row.Installed }}</p>
+            <p>Brook是否开启: {{ scope.row.BStatus }}</p>
+            <div slot="reference" class="name-wrapper">
+              <el-tag size="medium">{{ scope.row.Status }}</el-tag>
+            </div>
+          </el-popover>
         </template>
       </el-table-column>
-      <el-table-column label="备注">
+      <el-table-column label="备注" width="180">
         <template slot-scope="scope">
           <span>{{ scope.row.Desc }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作">
+      <el-table-column label="操作" width="180">
         <template slot-scope="scope">
           <el-dropdown @command="handleCommand">
-            <el-button type="primary" :key="scope.$row">
+            <el-button :key="scope.$row" class="more-btn">
               更多操作<i class="el-icon-arrow-down el-icon--right"></i>
             </el-button>
             <el-dropdown-menu slot="dropdown">
@@ -357,6 +365,15 @@ export default {
 }
 </script>
 <style>
+.more-btn {
+  background: linear-gradient(
+    90deg,
+    rgba(31, 51, 212, 1) 0%,
+    rgba(51, 69, 223, 1) 48%,
+    rgba(72, 88, 241, 1) 100%
+  ) !important;
+  color: whitesmoke !important;
+}
 .server-card {
   border-radius: 0.5rem !important;
   border: 1px solid #eaeaea;

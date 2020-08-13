@@ -4,7 +4,7 @@
       <NavBar />
     </el-header>
     <el-main class="page-main">
-      <OperationBar />
+      <OperationBar class="hidden-sm-and-down" />
       <ServerCard :servers="this.$store.state.servers" />
       <ForwardCard :forwards="this.$store.state.forwards" />
       <popup-form
@@ -12,7 +12,7 @@
         :forwards="this.$store.state.forwards"
       ></popup-form>
     </el-main>
-    <el-footer>Footer</el-footer>
+    <!-- <el-footer>Footer</el-footer> -->
   </el-container>
 </template>
 
@@ -23,6 +23,7 @@ import NavBar from './components/NavBar.vue'
 import ForwardCard from './components/ForwardCard.vue'
 import OperationBar from './components/OperationBar.vue'
 import PopupForm from './components/PopupForm.vue'
+import 'element-ui/lib/theme-chalk/display.css'
 export default {
   name: 'Home',
   components: { ServerCard, NavBar, ForwardCard, OperationBar, PopupForm },
@@ -39,8 +40,9 @@ export default {
     if (this.$store.state.username == '') {
       //未检测到登录信息
       this.$router.replace({ path: '/login' })
+    } else {
+      this.$common.getData(this)
     }
-    this.$common.getData(this)
     //如果过期，重登
     /*
     let now = Date.parse(new Date())
@@ -65,7 +67,7 @@ export default {
   padding: 0 !important;
 }
 .page-main {
-  margin: auto 8%;
+  margin: auto 6%;
 }
 @media (max-width: 1199px) {
   .page-header {

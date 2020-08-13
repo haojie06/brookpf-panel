@@ -268,6 +268,7 @@ export default {
             console.log(JSON.stringify(e))
           })
         this.$store.commit('updateAddForwardFormVisable', false)
+        this.$common.getData(this)
         //this.$router.go(0)
       } else {
         this.$message({

@@ -50,11 +50,11 @@ export default {
   methods: {
     login() {
       //form-data形式提交
-      const params = new FormData()
+      let params = new FormData()
       params.append('Username', this.loginForm.username)
       params.append('Password', this.loginForm.password)
       this.$axios
-        .post('/web/login', params)
+        .post(`${this.$store.state.webServerUrl}/web/login`, params)
         .then((successResponse) => {
           if (successResponse.data.Code === 200) {
             console.log('登陆成功')
@@ -79,6 +79,7 @@ export default {
           }
         })
         .catch((err) => {
+          console.log('登陆失败' + JSON.stringify(err))
           this.$notify.error({
             title: '错误',
             message: '登陆失败' + JSON.stringify(err),
@@ -89,6 +90,9 @@ export default {
 }
 </script>
 <style>
+.login-page {
+  font-size: 160%;
+}
 .login-container {
   border-radius: 15px;
   background-clip: padding-box;

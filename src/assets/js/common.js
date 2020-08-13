@@ -6,7 +6,7 @@ export default {
     fdata.append('Username', vue.$store.state.username)
     fdata.append('Password', vue.$store.state.password)
     vue.$axios
-      .post('/web/getservers', fdata)
+      .post(`${vue.$store.state.webServerUrl}/web/getservers`, fdata)
       .then((response) => {
         if (response.data.Code == 200) {
           //.log('查询成功:\n' + JSON.stringify(response))
@@ -19,10 +19,14 @@ export default {
             //Brook是否安装
             servers[i].Installed = false
             servers[i].Online = false
+            console.log(
+              '查询到的服务器(来自web端)\n' + JSON.stringify(servers[i])
+            )
           }
           vue.$store.commit('updateServers', servers)
           //vue.$store.commit()
           //逐一请求服务器获取状态以及中转列表
+          let forwards = []
           if (servers != []) {
             for (let i = 0; i < servers.length; i++) {
               //逐一请求。。并更新列表
@@ -37,13 +41,10 @@ export default {
               vue.$axios
                 .post(`http://${server.IP}:${server.Port}/api/getstatus`, fdata)
                 .then((response) => {
-                  console.log(
-                    '受控端查询记录\ni' + JSON.stringify(response.data)
-                  )
                   if (response.data.Code == 200) {
                     //成功发送到服务器，并正常回应
                     console.log(
-                      '查询到的服务器\n' + JSON.stringify(response.data)
+                      '查询到的服务器(受控端)\n' + JSON.stringify(response.data)
                     )
                     servers[i].Status = '在线'
                     servers[i].Online = true
@@ -53,7 +54,7 @@ export default {
                     //vue.$store.commit('updateServers', servers)
                     //vue.$store.commit('updateServers', vue.servers)
                     //添加到中转列表中
-                    let forwards = []
+
                     let records = response.data.Records
                     for (let index in records) {
                       let ritems = records[index].split(' ')
@@ -61,6 +62,11 @@ export default {
                         break
                       }
                       let forward = {}
+                      //对forward进行操作需要知道
+                      forward.username = server.UserName
+                      forward.password = server.Password
+                      forward.controlport = server.Port
+                      //中转记录的信息
                       forward.lname = server.Name
                       forward.lhost = server.IP
                       forward.lport = ritems[0]
@@ -82,8 +88,8 @@ export default {
                         forward.rname = '未命名'
                       }
                       forwards.push(forward)
-                      vue.$store.commit('updateForwards', forwards)
                     }
+                    vue.$store.commit('updateForwards', forwards)
                   }
                 })
                 .catch(() => {
@@ -100,7 +106,7 @@ export default {
           console.log('查询失败:\n' + JSON.stringify(response))
           vue.$notify({
             title: '失败',
-            message: '查询失败\n' + JSON.stringify(response),
+            message: '查询服务器列表失败\n' + JSON.stringify(response),
             type: 'success',
           })
         }
