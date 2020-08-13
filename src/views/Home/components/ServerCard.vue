@@ -1,6 +1,56 @@
 <!--中转服务器列表-->
 <template>
   <el-card class="server-card">
+    <el-dialog title="编辑服务器" :visible.sync="dialogFormVisible">
+      <el-form :model="editServerForm">
+        <el-form-item label="服务器名称" :label-width="formLabelWidth">
+          <el-input v-model="editServerForm.Name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="服务器地址" :label-width="formLabelWidth">
+          <el-row>
+            <el-col :span="14"
+              ><el-input
+                v-model="editServerForm.IP"
+                autocomplete="off"
+                placeholder="服务器IP"
+              ></el-input>
+            </el-col>
+            <el-col :span="2">:</el-col>
+            <el-col :span="8"
+              ><el-input
+                v-model="editServerForm.Port"
+                autocomplete="off"
+                placeholder="端口"
+              ></el-input
+            ></el-col>
+          </el-row>
+        </el-form-item>
+
+        <el-form-item label="服务器用户名" :label-width="formLabelWidth">
+          <el-input
+            v-model="editServerForm.UserName"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="服务器密码" :label-width="formLabelWidth">
+          <el-input
+            v-model="editServerForm.Password"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="描述" :label-width="formLabelWidth">
+          <el-input
+            type="textarea"
+            v-model="editServerForm.Desc"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="commitEdit">确 定</el-button>
+      </div>
+    </el-dialog>
     <el-divider content-position="left">中转服务器列表</el-divider>
     <el-table :data="servers" style="width: 100%">
       <el-table-column label="ID">
@@ -79,6 +129,9 @@ export default {
     return {
       index: 0,
       opServer: {},
+      dialogFormVisible: false,
+      editServerForm: {},
+      formLabelWidth: '120px',
     }
   },
   methods: {
@@ -149,6 +202,62 @@ export default {
               })
             })
           break
+        case 'edit':
+          //编辑服务器
+          this.dialogFormVisible = true
+          this.editServerForm = server
+          break
+      }
+    },
+    commitEdit() {
+      //提交更新
+      //检查表单是否填完了
+      let compeleted = true
+      for (let i in this.editServerForm) {
+        if (this.editServerForm[i] == '') {
+          this.$message({
+            type: 'warning',
+            message: '请检查' + i + '是否填写完整',
+          })
+          compeleted = false
+        }
+      }
+      if (compeleted) {
+        let formData = new FormData()
+        formData.append('ServerUsername', this.editServerForm.UserName)
+        formData.append('ServerPassword', this.editServerForm.Password)
+        formData.append('Username', this.$store.state.username)
+        formData.append('Password', this.$store.state.password)
+        formData.append('Name', this.editServerForm.Name)
+        formData.append('IP', this.editServerForm.IP)
+        formData.append('Port', this.editServerForm.Port)
+        formData.append('Desc', this.editServerForm.Desc)
+        formData.append('ID', this.editServerForm.ID)
+        this.$axios
+          .post(this.$store.state.webServerUrl + '/web/editserver', formData)
+
+          .then((r) => {
+            if (r.data.Code == 200) {
+              this.$message({
+                type: 'success',
+                message: '成功修改服务器',
+              })
+            } else {
+              this.$message({
+                type: 'error',
+                message: '修改服务器配置失败' + r.data.Msg,
+              })
+            }
+          })
+          .catch((e) => {
+            this.$message({
+              type: 'error',
+              message: '修改服务器配置失败' + JSON.stringify(e),
+            })
+          })
+        //更新
+        this.dialogFormVisible = false
+        this.$router.go(0)
       }
     },
   },
