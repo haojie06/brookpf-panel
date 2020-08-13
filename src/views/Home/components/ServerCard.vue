@@ -207,6 +207,95 @@ export default {
           this.dialogFormVisible = true
           this.editServerForm = server
           break
+        case 'start': {
+          //启动brook服务
+          //
+          let fd = new FormData()
+          fd.append('Username', server.UserName)
+          fd.append('Password', server.Password)
+          this.$axios
+            .post(`http://${server.IP}:${server.Port}/api/start`, fd)
+            .then((r) => {
+              if (r.data.Code == 200) {
+                this.$message({
+                  type: 'success',
+                  message: '已启动Brook',
+                })
+              } else {
+                this.$message({
+                  type: 'error',
+                  message: '启动Brook失败' + r.data.Msg,
+                })
+              }
+            })
+            .catch((e) => {
+              this.$message({
+                type: 'error',
+                message: '启动Brook失败' + JSON.stringify(e),
+              })
+            })
+          break
+        }
+        case 'stop': {
+          //停止brook服务
+          let fd = new FormData()
+          fd.append('Username', server.UserName)
+          fd.append('Password', server.Password)
+          this.$axios
+            .post(`http://${server.IP}:${server.Port}/api/stop`, fd)
+            .then((r) => {
+              if (r.data.Code == 200) {
+                this.$message({
+                  type: 'success',
+                  message: '已停止Brook',
+                })
+              } else {
+                this.$message({
+                  type: 'error',
+                  message: '停止Brook失败' + r.data.Msg,
+                })
+              }
+            })
+            .catch((e) => {
+              this.$message({
+                type: 'error',
+                message: '停止Brook失败' + JSON.stringify(e),
+              })
+            })
+          break
+        }
+        case 'restart': {
+          //重启brook服务
+          let fd = new FormData()
+          fd.append('Username', server.UserName)
+          fd.append('Password', server.Password)
+          this.$axios
+            .post(`http://${server.IP}:${server.Port}/api/restart`, fd)
+            .then((r) => {
+              if (r.data.Code == 200) {
+                this.$message({
+                  type: 'success',
+                  message: '已重启Brook',
+                })
+              } else {
+                this.$message({
+                  type: 'error',
+                  message: '重启Brook失败' + r.data.Msg,
+                })
+              }
+            })
+            .catch((e) => {
+              this.$message({
+                type: 'error',
+                message: '重启Brook失败' + JSON.stringify(e),
+              })
+            })
+          break
+        }
+
+        case 'print':
+          //TODO:打印brook受控端日志
+          break
       }
     },
     commitEdit() {
