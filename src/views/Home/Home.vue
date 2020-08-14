@@ -4,7 +4,7 @@
       <NavBar />
     </el-header>
     <el-main class="page-main">
-      <OperationBar class="hidden-sm-and-down" />
+      <OperationBar />
       <ServerCard :servers="this.$store.state.servers" />
       <ForwardCard :forwards="this.$store.state.forwards" />
       <popup-form
@@ -66,9 +66,18 @@ export default {
   width: 100%;
   padding: 0 !important;
 }
-.page-main {
-  margin: auto 6%;
+@media screen and(min-width: 960px) {
+  .page-main {
+    margin: auto 6%;
+  }
 }
+@media screen and (max-width: 479px) {
+  .page-main {
+    margin: auto 1%;
+    padding: 10px !important;
+  }
+}
+
 @media (max-width: 1199px) {
   .page-header {
     background: #fff;

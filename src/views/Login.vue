@@ -93,15 +93,29 @@ export default {
 .login-page {
   font-size: 160%;
 }
-.login-container {
-  border-radius: 15px;
-  background-clip: padding-box;
-  margin: 100px auto;
-  width: 350px;
-  padding: 35px 35px 15px 35px;
-  background: #fff;
-  border: 1px solid #eaeaea;
-  box-shadow: 0 0 25px #cac6c6;
+@media screen and (min-width: 480px) {
+  .login-container {
+    border-radius: 15px;
+    background-clip: padding-box;
+    margin: 100px auto;
+    width: 350px;
+    padding: 35px 35px 15px 35px;
+    background: #fff;
+    border: 1px solid #eaeaea;
+    box-shadow: 0 0 25px #cac6c6;
+  }
+}
+@media screen and (max-width: 479px) {
+  .login-container {
+    border-radius: 15px;
+    background-clip: padding-box;
+    margin: 30% auto;
+    width: 18rem;
+    padding: 35px 35px 15px 35px;
+    background: #fff;
+    border: 1px solid #eaeaea;
+    box-shadow: 0 0 25px #cac6c6;
+  }
 }
 
 .login-title {

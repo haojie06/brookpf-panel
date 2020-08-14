@@ -1,34 +1,53 @@
 <template>
-  <el-row :gutter="30" class="op-row">
-    <el-col :span="6">
-      <el-card class="op-card">
+  <div>
+    <div class="op-row-mobile hidden-sm-and-up">
+      <!-- 手机显示的卡片按钮 -->
+      <el-card class="op-card op-card-mobile">
         <div class="op-tip">您可能需要以下操作</div>
         <el-button type="primary" class="op-button" @click="addServer"
           >添加中转服务器</el-button
         >
       </el-card>
-    </el-col>
-    <el-col :span="6">
-      <el-card class="op-card">
+      <el-card class="op-card op-card-mobile">
         <div class="op-tip">您可能需要以下操作</div>
         <el-button type="primary" class="op-button" @click="addForward"
           >添加转发规则</el-button
         >
       </el-card>
-    </el-col>
-    <el-col :span="6">
-      <el-card class="op-card">
-        <div class="op-tip">您可能需要以下操作</div>
-        <el-button type="primary" class="op-button">重启Brook</el-button>
-      </el-card>
-    </el-col>
-    <el-col :span="6">
-      <el-card class="op-card">
-        <div class="op-tip">您可能需要以下操作</div>
-        <el-button type="primary" class="op-button">停止Brook</el-button>
-      </el-card>
-    </el-col>
-  </el-row>
+    </div>
+    <div>
+      <el-row :gutter="30" class="op-row hidden-sm-and-down">
+        <el-col :span="6">
+          <el-card class="op-card">
+            <div class="op-tip">您可能需要以下操作</div>
+            <el-button type="primary" class="op-button" @click="addServer"
+              >添加中转服务器</el-button
+            >
+          </el-card>
+        </el-col>
+        <el-col :span="6">
+          <el-card class="op-card">
+            <div class="op-tip">您可能需要以下操作</div>
+            <el-button type="primary" class="op-button" @click="addForward"
+              >添加转发规则</el-button
+            >
+          </el-card>
+        </el-col>
+        <el-col :span="6">
+          <el-card class="op-card">
+            <div class="op-tip">您可能需要以下操作</div>
+            <el-button type="primary" class="op-button">重启Brook</el-button>
+          </el-card>
+        </el-col>
+        <el-col :span="6">
+          <el-card class="op-card">
+            <div class="op-tip">您可能需要以下操作</div>
+            <el-button type="primary" class="op-button">停止Brook</el-button>
+          </el-card>
+        </el-col>
+      </el-row>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -67,6 +86,10 @@ export default {
   background: #fff;
   border: 1px solid #eaeaea;
   box-shadow: 0 0 25px #cac6c6;
+}
+
+.op-card-mobile {
+  margin: 1rem auto;
 }
 .op-tip {
   font-size: 0.8em;
