@@ -73,7 +73,9 @@ export default {
                       vue.$store.commit('updateServers', servers)
                     }
                     for (let index in records) {
-                      let ritems = records[index].split(' ')
+                      // 这了先用&来划分，尝试获取流量统计 datas[1]是流量部分 tcp入 tcp出 udp入 udp出
+                      let datas = records[index].split('&')
+                      let ritems = datas[0].split(' ')
                       if (ritems.length == 1) {
                         break
                       }
@@ -110,6 +112,27 @@ export default {
                       } else {
                         forward.rname = '未命名'
                       }
+                      forward.tcpIn = '0MB'
+                      forward.tcpOut = '0MB'
+                      forward.udpIn = '0MB'
+                      forward.udpOut = '0MB'
+                      forward.totalIn = '0MB'
+                      forward.totalOut = '0MB'
+                      if (datas[1] != '' && datas[1] != undefined) {
+                        //流量统计。
+                        let bw = datas[1].split(' ')
+                        forward.tcpOut = this.convertBandwdith(bw[0])
+                        forward.tcpIn = this.convertBandwdith(bw[1])
+                        forward.udpOut = this.convertBandwdith(bw[2])
+                        forward.udpIn = this.convertBandwdith(bw[3])
+                        forward.totalOut = this.convertBandwdith(
+                          Number(bw[0]) + Number(bw[2])
+                        )
+                        forward.totalIn = this.convertBandwdith(
+                          Number(bw[1]) + Number(bw[3])
+                        )
+                        console.log('转化后的FORWARD' + JSON.stringify(forward))
+                      }
                       forwards.push(forward)
                     }
                     vue.$store.commit('updateForwards', forwards)
@@ -142,5 +165,24 @@ export default {
           type: 'error',
         })
       })
+  },
+  //带宽转换 字节转为易读的字符串
+  convertBandwdith(str) {
+    let bytes = Number(str)
+    let KB = bytes / 1024
+    let MB = KB / 1024
+    let GB = MB / 1024
+    let TB = GB / 1024
+    if (TB >= 1) {
+      return String(TB.toFixed(1) + 'TB')
+    } else if (GB >= 1) {
+      return String(GB.toFixed(1) + 'GB')
+    } else if (MB >= 1) {
+      return String(MB.toFixed(1) + 'MB')
+    } else if (KB >= 1) {
+      return String(KB.toFixed(1) + 'KB')
+    } else {
+      return String(bytes + 'B')
+    }
   },
 }

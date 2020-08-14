@@ -77,12 +77,26 @@
             <p>Brook是否安装: {{ scope.row.Installed }}</p>
             <p>Brook是否开启: {{ scope.row.BStatus }}</p>
             <div slot="reference" class="name-wrapper">
-              <el-tag size="medium">{{ scope.row.Status }}</el-tag>
+              <el-tag size="medium" type="success" v-if="scope.row.Online">{{
+                scope.row.Status
+              }}</el-tag>
+              <el-tag
+                size="medium"
+                type="info"
+                v-if="scope.row.Status == '查询中'"
+                >{{ scope.row.Status }}</el-tag
+              >
+              <el-tag
+                size="medium"
+                type="danger"
+                v-if="scope.row.Status == '离线'"
+                >{{ scope.row.Status }}</el-tag
+              >
             </div>
           </el-popover>
         </template>
       </el-table-column>
-      <el-table-column label="备注" width="180" align="center">
+      <el-table-column label="信息" width="180" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.Desc }}</span>
         </template>

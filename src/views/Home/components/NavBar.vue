@@ -8,7 +8,7 @@
           </div>
         </el-col>
         <el-col :span="8" class="right-col">
-          <div class="header-button-box">
+          <!-- <div class="header-button-box">
             <el-avatar class="avatar" :size="40" :src="iconUrl"></el-avatar>
             <el-dropdown class="nav-dropdown">
               <span class="el-dropdown-link">
@@ -21,7 +21,7 @@
                 <el-dropdown-item disabled>停止Brook</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
-          </div>
+          </div> -->
         </el-col>
       </el-row>
     </div>
