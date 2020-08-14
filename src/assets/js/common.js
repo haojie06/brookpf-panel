@@ -34,7 +34,7 @@ export default {
           vue.$store.commit('updateServers', servers)
           //vue.$store.commit()
           //逐一请求服务器获取状态以及中转列表
-          // let forwards = []
+          let forwards = []
           if (servers != []) {
             for (let i = 0; i < servers.length; i++) {
               //逐一请求。。并更新列表
@@ -67,14 +67,15 @@ export default {
                     //添加到中转列表中
 
                     let records = response.data.Records
-                    info.totalForwards =
-                      vue.$store.state.infoPanel.totalForwards + records.length
-                    vue.$store.commit('updateInfoPanel', info)
+
                     for (let index in records) {
                       let ritems = records[index].split(' ')
                       if (ritems.length == 1) {
                         break
                       }
+                      info.totalForwards =
+                        vue.$store.state.infoPanel.totalForwards + 1
+                      vue.$store.commit('updateInfoPanel', info)
                       let forward = {}
                       //对forward进行操作需要知道
                       forward.username = server.UserName
@@ -104,9 +105,9 @@ export default {
                       } else {
                         forward.rname = '未命名'
                       }
-                      //forwards.push(forward)
-                      vue.$store.commit('updateForwards', forward)
+                      forwards.push(forward)
                     }
+                    vue.$store.commit('updateForwards', forwards)
                   }
                 })
                 .catch(() => {

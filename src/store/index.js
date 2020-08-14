@@ -42,9 +42,9 @@ export default new Vuex.Store({
       console.log('更新store中的服务器信息')
       state.servers = servers
     },
-    updateForwards(state, forward) {
+    updateForwards(state, forwards) {
       console.log('更新store中的中转记录信息 更新前')
-      state.forwards.push(forward)
+      state.forwards = forwards
     },
 
     updateAddServerFormVisable(state, visable) {

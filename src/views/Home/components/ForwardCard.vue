@@ -3,13 +3,13 @@
   <el-card class="forward-card">
     <el-divider content-position="left">中转记录列表</el-divider>
     <el-table :data="forwards" style="width: 100%">
-      <el-table-column label="#" width="100">
+      <el-table-column label="#" width="100" align="center">
         <template slot-scope="scope">
           <i class="el-icon-d-arrow-right"></i>
           <span style="margin-left: 10px">{{ scope.$index + 1 }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="中转服务器" width="140">
+      <el-table-column label="中转服务器" width="140" align="center">
         <template slot-scope="scope">
           <el-popover trigger="hover" placement="top">
             <p>中转服务器名: {{ scope.row.rname }}</p>
@@ -20,27 +20,27 @@
           </el-popover>
         </template>
       </el-table-column>
-      <el-table-column label="服务器地址/本地端口" width="180">
+      <el-table-column label="服务器地址/本地端口" width="180" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.lhost }}:{{ scope.row.lport }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="被转发地址/远程端口" width="180">
+      <el-table-column label="被转发地址/远程端口" width="180" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.rhost }}:{{ scope.row.rport }}</span>
         </template></el-table-column
       >
-      <el-table-column label="状态" width="80">
+      <el-table-column label="状态" width="80" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.enable }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="备注" width="150">
+      <el-table-column label="备注" width="150" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.note }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" width="150">
+      <el-table-column label="操作" width="150" align="center">
         <template slot-scope="scope">
           <el-button
             size="mini"
@@ -56,12 +56,15 @@
           >
             启用
           </el-button>
-          <el-button
-            size="mini"
-            type="danger"
-            @click="deleteForward(scope.$index, scope.row)"
-            >删除</el-button
+          <el-popconfirm
+            title="确定要删除该中转记录吗"
+            style="margin-left: 0.2rem"
+            @onConfirm="deleteForward(scope.$index, scope.row)"
           >
+            <el-button slot="reference" type="danger" size="mini"
+              >删除</el-button
+            >
+          </el-popconfirm>
         </template>
       </el-table-column>
     </el-table>
