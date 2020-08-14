@@ -10,11 +10,12 @@ export default new Vuex.Store({
     password: '',
     lastOP: 0,
     servers: [],
-    frowards: [],
+    forwards: [],
     portforwards: [],
     addServerFormVisable: false,
     addForwardFormVisable: false,
     webServerUrl: 'http://ru.better06.xyz:8001',
+    //webServerUrl: 'http://119.28.68.85:8001',
     infoPanel: {
       totalServers: 0,
       onlineServers: 0,
@@ -41,9 +42,9 @@ export default new Vuex.Store({
       console.log('更新store中的服务器信息')
       state.servers = servers
     },
-    updateForwards(state, forwards) {
-      console.log('更新store中的中转记录信息')
-      state.forwards = forwards
+    updateForwards(state, forward) {
+      console.log('更新store中的中转记录信息 更新前')
+      state.forwards.push(forward)
     },
 
     updateAddServerFormVisable(state, visable) {

@@ -34,7 +34,7 @@ export default {
           vue.$store.commit('updateServers', servers)
           //vue.$store.commit()
           //逐一请求服务器获取状态以及中转列表
-          let forwards = []
+          // let forwards = []
           if (servers != []) {
             for (let i = 0; i < servers.length; i++) {
               //逐一请求。。并更新列表
@@ -104,9 +104,9 @@ export default {
                       } else {
                         forward.rname = '未命名'
                       }
-                      forwards.push(forward)
+                      //forwards.push(forward)
+                      vue.$store.commit('updateForwards', forward)
                     }
-                    vue.$store.commit('updateForwards', forwards)
                   }
                 })
                 .catch(() => {
