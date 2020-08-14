@@ -1,37 +1,39 @@
 <template>
-  <body class="login-page">
-    <el-form
-      class="login-container"
-      status-icon
-      label-position="left"
-      label-width="0px"
-    >
-      <h3 class="login-title">Brook面板登陆</h3>
-      <el-form-item required>
-        <el-input
-          type="text"
-          v-model="loginForm.username"
-          auto-complete="off"
-          placeholder="账号"
-        ></el-input>
-      </el-form-item>
-      <el-form-item required>
-        <el-input
-          type="password"
-          v-model="loginForm.password"
-          auto-complete="off"
-          placeholder="密码"
-        ></el-input>
-      </el-form-item>
-      <el-form-item style="width: 100%">
-        <el-button
-          type="primary"
-          style="width: 100%;background: #505458;border: none"
-          v-on:click="login"
-          >登录</el-button
-        >
-      </el-form-item>
-    </el-form>
+  <body>
+    <div class="login-page">
+      <el-form
+        class="login-container"
+        status-icon
+        label-position="left"
+        label-width="0px"
+      >
+        <h3 class="login-title">Brook面板登陆</h3>
+        <el-form-item required>
+          <el-input
+            type="text"
+            v-model="loginForm.username"
+            auto-complete="off"
+            placeholder="账号"
+          ></el-input>
+        </el-form-item>
+        <el-form-item required>
+          <el-input
+            type="password"
+            v-model="loginForm.password"
+            auto-complete="off"
+            placeholder="密码"
+          ></el-input>
+        </el-form-item>
+        <el-form-item style="width: 100%">
+          <el-button
+            type="primary"
+            style="width: 100%;background: #505458;border: none"
+            v-on:click="login"
+            >登录</el-button
+          >
+        </el-form-item>
+      </el-form>
+    </div>
   </body>
 </template>
 
@@ -92,29 +94,41 @@ export default {
 <style>
 .login-page {
   font-size: 160%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  background-image: url('../assets/images/suya.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 @media screen and (min-width: 480px) {
   .login-container {
+    font-size: 160%;
+    display: block;
     border-radius: 15px;
     background-clip: padding-box;
     margin: 100px auto;
     width: 350px;
     padding: 35px 35px 15px 35px;
-    background: #fff;
+    background: aliceblue;
     border: 1px solid #eaeaea;
     box-shadow: 0 0 25px #cac6c6;
   }
 }
 @media screen and (max-width: 479px) {
   .login-container {
+    font-size: 160%;
+    display: block;
     border-radius: 15px;
     background-clip: padding-box;
     margin: 30% auto;
     width: 18rem;
     padding: 35px 35px 15px 35px;
-    background: #fff;
+    background: aliceblue;
     border: 1px solid #eaeaea;
-    box-shadow: 0 0 25px #cac6c6;
+    box-shadow: 0 0 10px #ffffff;
   }
 }
 

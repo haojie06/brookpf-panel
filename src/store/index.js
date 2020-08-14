@@ -14,7 +14,7 @@ export default new Vuex.Store({
     portforwards: [],
     addServerFormVisable: false,
     addForwardFormVisable: false,
-    webServerUrl: 'http://ru.better06.xyz:8001',
+    webServerUrl: 'http://119.28.68.85:8001',
   },
   mutations: {
     login(state, payload) {

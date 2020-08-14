@@ -148,12 +148,12 @@ export default {
   data() {
     return {
       addServerForm: {
-        name: '测试服务器',
-        desc: '用于测试',
-        username: 'haojie',
-        password: 'haojie06',
-        host: '127.0.0.1',
-        port: '8080',
+        name: '',
+        desc: '',
+        username: '',
+        password: '',
+        host: '',
+        port: '',
       },
       addForwardForm: {
         lport: '',
