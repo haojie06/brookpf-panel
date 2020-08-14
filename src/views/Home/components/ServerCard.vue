@@ -55,7 +55,7 @@
     <!--中转服务器表格-->
     <el-divider content-position="left">中转服务器列表</el-divider>
     <el-table :data="servers">
-      <el-table-column label="ID" width="100">
+      <el-table-column label="ID" width="120">
         <template slot-scope="scope">
           <i class="el-icon-arrow-right"></i>
           <span style="margin-left: 10px">{{ scope.row.ID }}</span>

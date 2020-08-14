@@ -61,12 +61,12 @@ export default {
   method() {},
 }
 </script>
-<style>
+<style scoped>
 .header {
   width: 100%;
   padding: 0 !important;
 }
-@media screen and(min-width: 960px) {
+@media screen and (min-width: 740px) {
   .page-main {
     margin: auto 6%;
   }
@@ -74,7 +74,6 @@ export default {
 @media screen and (max-width: 479px) {
   .page-main {
     margin: auto 1%;
-    padding: 10px !important;
   }
 }
 

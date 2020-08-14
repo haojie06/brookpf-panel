@@ -2,10 +2,10 @@
   <div>
     <!--添加中转服务器表单-->
     <el-dialog
-      class="add-server"
       :show-close="false"
       title="添加中转服务器"
       :visible.sync="this.$store.state.addServerFormVisable"
+      class="hidden-sm-and-down"
     >
       <el-form :model="addServerForm">
         <el-form-item label="服务器名称" :label-width="formLabelWidth">
@@ -60,10 +60,71 @@
         <el-button type="primary" @click="confirmAddServer">确 定</el-button>
       </div>
     </el-dialog>
+    <!--添加中转服务器表单 小屏幕显示的模板-->
+    <el-dialog
+      :show-close="false"
+      title="添加中转服务器"
+      :visible.sync="this.$store.state.addServerFormVisable"
+      :fullscreen="true"
+      :modal="false"
+      class="hidden-sm-and-up"
+    >
+      <el-form :model="addServerForm">
+        <el-form-item label="服务器名称" :label-width="formLabelWidth">
+          <el-input v-model="addServerForm.name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="服务器地址" :label-width="formLabelWidth">
+          <el-row>
+            <el-col :span="14"
+              ><el-input
+                v-model="addServerForm.host"
+                autocomplete="off"
+                placeholder="服务器IP"
+              ></el-input>
+            </el-col>
+            <el-col :span="2">:</el-col>
+            <el-col :span="8"
+              ><el-input
+                v-model="addServerForm.port"
+                autocomplete="off"
+                placeholder="端口"
+              ></el-input
+            ></el-col>
+          </el-row>
+        </el-form-item>
 
+        <el-form-item label="服务器用户名" :label-width="formLabelWidth">
+          <el-input
+            v-model="addServerForm.username"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="服务器密码" :label-width="formLabelWidth">
+          <el-input
+            v-model="addServerForm.password"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item
+          label="描述"
+          :label-width="formLabelWidth"
+          v-model="addServerForm.desc"
+        >
+          <el-input
+            type="textarea"
+            v-model="addServerForm.desc"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="cancelAddServer">取 消</el-button>
+        <el-button type="primary" @click="confirmAddServer">确 定</el-button>
+      </div>
+    </el-dialog>
     <!---添加中转表单-->
     <el-dialog
-      class="add-server"
+      class="add-server hidden-sm-and-down"
       :show-close="false"
       title="添加中转记录"
       :visible.sync="this.$store.state.addForwardFormVisable"
@@ -74,7 +135,7 @@
         </el-form-item>
         <el-form-item label="中转服务器" :label-width="formLabelWidth">
           <el-row>
-            <el-col :span="18">
+            <el-col :span="14">
               <el-select
                 v-model="addForwardForm.lserver"
                 placeholder="选择服务器"
@@ -97,7 +158,86 @@
               </el-select>
             </el-col>
             <el-col :span="2">:</el-col>
-            <el-col :span="4">
+            <el-col :span="8">
+              <el-input
+                v-model="addForwardForm.lport"
+                autocomplete="off"
+                placeholder="端口"
+              ></el-input>
+            </el-col>
+          </el-row>
+        </el-form-item>
+        <el-form-item label="被中转服务器" :label-width="formLabelWidth">
+          <el-row>
+            <el-col :span="14"
+              ><el-input
+                v-model="addForwardForm.host"
+                autocomplete="off"
+                placeholder="被中转服务器IP"
+              ></el-input>
+            </el-col>
+            <el-col :span="2">:</el-col>
+            <el-col :span="8"
+              ><el-input
+                v-model="addForwardForm.rport"
+                autocomplete="off"
+                placeholder="端口"
+              ></el-input
+            ></el-col>
+          </el-row>
+        </el-form-item>
+        <el-form-item label="描述" :label-width="formLabelWidth">
+          <el-input
+            type="textarea"
+            autocomplete="off"
+            v-model="addForwardForm.desc"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="cancelAddForward">取 消</el-button>
+        <el-button type="primary" @click="confirmAddForward">确 定</el-button>
+      </div>
+    </el-dialog>
+    <!---添加中转表单 小屏幕显示-->
+    <el-dialog
+      class="add-server hidden-sm-and-up"
+      :modal="false"
+      :fullscreen="true"
+      :show-close="false"
+      title="添加中转记录"
+      :visible.sync="this.$store.state.addForwardFormVisable"
+    >
+      <el-form :model="addServerForm">
+        <el-form-item label="中转名称" :label-width="formLabelWidth">
+          <el-input v-model="addForwardForm.name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="中转服务器" :label-width="formLabelWidth">
+          <el-row>
+            <el-col :span="14">
+              <el-select
+                v-model="addForwardForm.lserver"
+                placeholder="选择服务器"
+                style="display: block"
+                value-key="ID"
+                @change="onChange"
+              >
+                <el-option
+                  v-for="item in servers"
+                  :key="item.ID"
+                  :label="item.IP"
+                  :value="item"
+                  :disabled="!item.Online || !item.Installed"
+                >
+                  <span style="float: left">{{ item.IP }}</span>
+                  <span style="float: right; color: #8492a6; font-size: 13px">{{
+                    item.Name
+                  }}</span>
+                </el-option>
+              </el-select>
+            </el-col>
+            <el-col :span="2">:</el-col>
+            <el-col :span="8">
               <el-input
                 v-model="addForwardForm.lport"
                 autocomplete="off"
@@ -282,8 +422,12 @@ export default {
 </script>
 
 <style scoped>
-.add-server {
+@media screen and (max-width: 480px) {
+  .add-server > el-form {
+    width: 90%;
+  }
 }
+
 .el-form-item-dev {
   text-align: left;
 }
