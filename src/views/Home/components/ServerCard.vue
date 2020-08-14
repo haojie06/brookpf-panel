@@ -126,7 +126,7 @@
               >
               <el-dropdown-item
                 :command="beforeHandleCommand(scope.$index, scope.row, 'stop')"
-                >关闭转发</el-dropdown-item
+                >停止转发</el-dropdown-item
               >
               <el-dropdown-item
                 :command="

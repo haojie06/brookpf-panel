@@ -68,7 +68,7 @@ export default {
 }
 @media screen and (min-width: 740px) {
   .page-main {
-    margin: auto 6%;
+    margin: auto 2%;
   }
 }
 @media screen and (max-width: 479px) {
