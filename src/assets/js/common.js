@@ -5,12 +5,20 @@ export default {
     const fdata = new FormData()
     fdata.append('Username', vue.$store.state.username)
     fdata.append('Password', vue.$store.state.password)
+    let info = {
+      totalServers: 0,
+      onlineServers: 0,
+      enableForwards: 0,
+      totalForwards: 0,
+    }
     vue.$axios
       .post(`${vue.$store.state.webServerUrl}/web/getservers`, fdata)
       .then((response) => {
         if (response.data.Code == 200) {
           //.log('查询成功:\n' + JSON.stringify(response))
           let servers = response.data.Data.servers
+          info.totalServers = servers.length
+          vue.$store.commit('updateInfoPanel', info)
           for (let i in servers) {
             //servers[i] 默认没有Status等属性，如果先提交，那么新加入的属性变化无法被追踪，所以在第一次提交前先把属性加进去
             servers[i].Status = '查询中'
@@ -46,6 +54,9 @@ export default {
                     console.log(
                       '查询到的服务器(受控端)\n' + JSON.stringify(response.data)
                     )
+                    info.onlineServers =
+                      vue.$store.state.infoPanel.onlineServers + 1
+                    vue.$store.commit('updateInfoPanel', info)
                     servers[i].Status = '在线'
                     servers[i].Online = true
                     servers[i].BStatus = response.data.Enable
@@ -56,6 +67,9 @@ export default {
                     //添加到中转列表中
 
                     let records = response.data.Records
+                    info.totalForwards =
+                      vue.$store.state.infoPanel.totalForwards + records.length
+                    vue.$store.commit('updateInfoPanel', info)
                     for (let index in records) {
                       let ritems = records[index].split(' ')
                       if (ritems.length == 1) {
@@ -74,6 +88,9 @@ export default {
                       forward.rport = ritems[2]
                       if (ritems[3] == 1) {
                         forward.enable = true
+                        info.enableForwards =
+                          vue.$store.state.infoPanel.enableForwards + 1
+                        vue.$store.commit('updateInfoPanel', info)
                       } else {
                         forward.enable = false
                       }

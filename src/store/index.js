@@ -15,6 +15,12 @@ export default new Vuex.Store({
     addServerFormVisable: false,
     addForwardFormVisable: false,
     webServerUrl: 'http://ru.better06.xyz:8001',
+    infoPanel: {
+      totalServers: 0,
+      onlineServers: 0,
+      totalForwards: 0,
+      enableForwards: 0,
+    },
   },
   mutations: {
     login(state, payload) {
@@ -24,6 +30,12 @@ export default new Vuex.Store({
       console.log(
         `用户登录，提交至store u:${state.username} p:${state.password}`
       )
+    },
+    updateInfoPanel(state, info) {
+      state.infoPanel.totalServers = info.totalServers
+      state.infoPanel.onlineServers = info.onlineServers
+      state.infoPanel.totalForwards = info.totalForwards
+      state.infoPanel.enableForwards = info.enableForwards
     },
     updateServers(state, servers) {
       console.log('更新store中的服务器信息')
