@@ -1,13 +1,13 @@
 <template>
   <div>
-    <nav class="navbar">
+    <div class="navbar">
       <el-row>
         <el-col :span="16" class="logo-col nav-col">
           <div class="logo-box">
             <a href="/" class="logo-text">BROOKWEB</a>
           </div>
         </el-col>
-        <el-col :span="8" class="right-col nav-col">
+        <el-col :span="8" class="right-col">
           <div class="header-button-box">
             <el-avatar class="avatar" :size="40" :src="iconUrl"></el-avatar>
             <el-dropdown class="nav-dropdown">
@@ -24,7 +24,7 @@
           </div>
         </el-col>
       </el-row>
-    </nav>
+    </div>
   </div>
 </template>
 <script>
@@ -42,8 +42,9 @@ export default {
 .header-button-box {
   min-width: 30px;
   display: inline-block;
-  padding: 11px 0px;
+  padding: 0px;
   margin-left: 5%;
+  margin-top: 10px;
 }
 
 .logo-text {
@@ -68,12 +69,15 @@ export default {
   top: 0;
   z-index: 97;
 }
-
+el-row {
+  height: 65px;
+}
 .logo-col {
   text-align: left;
 }
 .right-col {
   text-align: left;
+  height: 60px;
 }
 .avatar {
   margin-left: 15px;

@@ -16,7 +16,7 @@
       </el-card>
     </div>
     <div>
-      <el-row :gutter="30" class="op-row hidden-sm-and-down">
+      <el-row :gutter="30" class="op-row hidden-xs-only">
         <el-col :span="6">
           <el-card class="op-card">
             <div class="op-tip">您可能需要以下操作</div>

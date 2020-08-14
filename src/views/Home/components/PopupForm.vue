@@ -5,6 +5,7 @@
       :show-close="false"
       title="添加中转服务器"
       :visible.sync="this.$store.state.addServerFormVisable"
+      :modal="true"
       class="hidden-sm-and-down"
     >
       <el-form :model="addServerForm">
@@ -67,7 +68,7 @@
       :visible.sync="this.$store.state.addServerFormVisable"
       :fullscreen="true"
       :modal="false"
-      class="hidden-sm-and-up"
+      class="hidden-md-and-up"
     >
       <el-form :model="addServerForm">
         <el-form-item label="服务器名称" :label-width="formLabelWidth">
@@ -199,9 +200,9 @@
         <el-button type="primary" @click="confirmAddForward">确 定</el-button>
       </div>
     </el-dialog>
-    <!---添加中转表单 小屏幕显示-->
+    <!---添加中转表单 电脑屏幕显示-->
     <el-dialog
-      class="add-server hidden-sm-and-up"
+      class="add-server hidden-md-and-up"
       :modal="false"
       :fullscreen="true"
       :show-close="false"
