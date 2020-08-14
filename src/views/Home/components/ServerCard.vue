@@ -94,10 +94,12 @@
               更多操作<i class="el-icon-arrow-down el-icon--right"></i>
             </el-button>
             <el-dropdown-menu slot="dropdown">
+              <!-- 需要询问，展示该服务器有多少条记录。如果不在线就算了 -->
               <el-dropdown-item
                 :command="beforeHandleCommand(scope.$index, scope.row, 'edit')"
                 >编辑</el-dropdown-item
               >
+
               <el-dropdown-item
                 :command="
                   beforeHandleCommand(scope.$index, scope.row, 'delete')
@@ -106,17 +108,17 @@
               >
               <el-dropdown-item
                 :command="beforeHandleCommand(scope.$index, scope.row, 'start')"
-                >开启Brook</el-dropdown-item
+                >开启转发</el-dropdown-item
               >
               <el-dropdown-item
                 :command="beforeHandleCommand(scope.$index, scope.row, 'stop')"
-                >关闭Brook</el-dropdown-item
+                >关闭转发</el-dropdown-item
               >
               <el-dropdown-item
                 :command="
                   beforeHandleCommand(scope.$index, scope.row, 'restart')
                 "
-                >重启Brook</el-dropdown-item
+                >重启转发</el-dropdown-item
               >
               <el-dropdown-item
                 :command="beforeHandleCommand(scope.$index, scope.row, 'print')"
@@ -138,7 +140,9 @@ export default {
       index: 0,
       opServer: {},
       dialogFormVisible: false,
-      editServerForm: {},
+      editServerForm: {
+        BStatus: 1,
+      },
       formLabelWidth: '120px',
     }
   },
@@ -160,7 +164,7 @@ export default {
         case 'delete':
           //进行服务器删除
           this.$confirm(
-            `确定要删除中转服务器${server.Name}吗？(服务器上的中转记录还会保留)`,
+            `确定要删除中转服务器${server.Name}吗？该服务器当前有${server.recordsNum}条转发规则(服务器上的中转记录还会保留)`,
             '提示',
             {
               confirmButtonText: '确定',
@@ -313,8 +317,9 @@ export default {
       //提交更新
       //检查表单是否填完了
       let compeleted = true
+      console.log('提交更新' + JSON.stringify(this.editServerForm))
       for (let i in this.editServerForm) {
-        if (this.editServerForm[i] == '') {
+        if (this.editServerForm[i] === '') {
           this.$message({
             type: 'warning',
             message: '请检查' + i + '是否填写完整',

@@ -61,18 +61,23 @@ export default {
                     servers[i].Online = true
                     servers[i].BStatus = response.data.Enable
                     servers[i].Installed = response.data.Installed
+                    servers[i].recordsNum = 0
                     //vue.$store.commit('updateServers', [])
                     //vue.$store.commit('updateServers', servers)
                     //vue.$store.commit('updateServers', vue.servers)
                     //添加到中转列表中
 
                     let records = response.data.Records
-
+                    if (records != '') {
+                      servers[i].recordsNum = records.length
+                      vue.$store.commit('updateServers', servers)
+                    }
                     for (let index in records) {
                       let ritems = records[index].split(' ')
                       if (ritems.length == 1) {
                         break
                       }
+
                       info.totalForwards =
                         vue.$store.state.infoPanel.totalForwards + 1
                       vue.$store.commit('updateInfoPanel', info)
