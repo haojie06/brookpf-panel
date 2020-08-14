@@ -397,6 +397,7 @@ export default {
   color: whitesmoke !important;
 }
 .server-card {
+  padding: 1rem 5%;
   border-radius: 0.5rem !important;
   border: 1px solid #eaeaea;
   box-shadow: 0 0 25px #cac6c6;
