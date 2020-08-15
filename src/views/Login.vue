@@ -39,12 +39,10 @@
 </template>
 
 <script>
-import Config from '../../public/config.json'
 export default {
   name: 'Login',
   data() {
     return {
-      Config,
       loginForm: {
         username: '',
         password: '',
@@ -58,6 +56,7 @@ export default {
       let params = new FormData()
       params.append('Username', this.loginForm.username)
       params.append('Password', this.loginForm.password)
+      console.log('登录' + this.$store.state.webServerUrl)
       this.$axios
         .post(`${this.$store.state.webServerUrl}/web/login`, params)
         .then((successResponse) => {
@@ -95,7 +94,15 @@ export default {
   created: function() {
     //读取
     // console.log('读取JSON' + Config.webserverUrl)
-    this.$store.commit('changeServerUrl', Config.webserverUrl)
+    //本地配置文件要用axios来读取，直接读取config.json 打包后更换配置不会生效
+    this.$axios
+      .get('/config.json')
+      .then((r) => {
+        this.$store.commit('changeServerUrl', r.data.webserverUrl)
+      })
+      .catch((e) => {
+        console.log('获取web后端配置文件失败\n' + JSON.stringify(e))
+      })
   },
 }
 </script>
