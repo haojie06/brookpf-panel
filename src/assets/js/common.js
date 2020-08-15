@@ -103,14 +103,14 @@ export default {
                         forward.enable = false
                       }
                       if (ritems[4] != undefined) {
-                        forward.note = ritems[4]
-                      } else {
-                        forward.note = '无'
-                      }
-                      if (ritems[5] != undefined) {
-                        forward.rname = ritems[5]
+                        forward.rname = ritems[4]
                       } else {
                         forward.rname = '未命名'
+                      }
+                      if (ritems[5] != undefined) {
+                        forward.note = ritems[5]
+                      } else {
+                        forward.rname = '无'
                       }
                       forward.tcpIn = '0MB'
                       forward.tcpOut = '0MB'

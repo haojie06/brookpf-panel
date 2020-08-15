@@ -66,7 +66,7 @@
           <span>{{ scope.row.Name }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="中转服务器地址" align="center">
+      <el-table-column label="中转服务器地址" align="center" min-width="170px">
         <template slot-scope="scope">
           <span>{{ scope.row.IP }}:{{ scope.row.Port }}</span>
         </template>
@@ -96,7 +96,7 @@
           </el-popover>
         </template>
       </el-table-column>
-      <el-table-column label="备注" align="center">
+      <el-table-column label="备注" align="center" min-width="150px">
         <template slot-scope="scope">
           <!-- 对输出进行裁剪 -->
           <el-popover trigger="hover" placement="top">
@@ -404,7 +404,6 @@ export default {
 }
 @media screen and (min-width: 480px) {
   .server-card {
-    padding: 1rem 2%;
     border-radius: 0.5rem !important;
     border: 1px solid #eaeaea;
     box-shadow: 0 0 25px #cac6c6;

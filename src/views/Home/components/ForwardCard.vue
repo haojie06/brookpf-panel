@@ -20,12 +20,20 @@
           </el-popover>
         </template>
       </el-table-column>
-      <el-table-column label="服务器地址/本地端口" align="center">
+      <el-table-column
+        label="服务器地址/本地端口"
+        align="center"
+        min-width="170px"
+      >
         <template slot-scope="scope">
           <span>{{ scope.row.lhost }}:{{ scope.row.lport }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="被转发地址/远程端口" align="center">
+      <el-table-column
+        label="被转发地址/远程端口"
+        align="center"
+        min-width="170px"
+      >
         <template slot-scope="scope">
           <span>{{ scope.row.rhost }}:{{ scope.row.rport }}</span>
         </template></el-table-column
@@ -36,7 +44,7 @@
           <el-tag type="danger" v-if="!scope.row.enable">停止</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="流量(上传/下载)" align="center">
+      <el-table-column label="流量(上传/下载)" align="center" min-width="120px">
         <template slot-scope="scope">
           <el-popover trigger="hover" placement="top">
             <p>
@@ -53,7 +61,7 @@
           </el-popover>
         </template>
       </el-table-column>
-      <el-table-column label="备注" align="center">
+      <el-table-column label="备注" align="center" min-width="150px">
         <template slot-scope="scope">
           <el-popover trigger="hover" placement="top">
             <p>{{ scope.row.note }}</p>

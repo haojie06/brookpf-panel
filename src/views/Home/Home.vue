@@ -66,13 +66,14 @@ export default {
   width: 100%;
   padding: 0 !important;
 }
-@media screen and (min-width: 740px) {
+@media screen and (min-width: 501px) {
   .page-main {
     margin: auto 2%;
   }
 }
-@media screen and (max-width: 479px) {
+@media screen and (max-width: 500px) {
   .page-main {
+    padding: 1rem 2%;
     margin: auto 1%;
   }
 }
