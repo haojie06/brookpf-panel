@@ -107,7 +107,7 @@
           </el-popover>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center">
+      <el-table-column label="操作" align="center" min-width="120px">
         <template slot-scope="scope">
           <el-dropdown @command="handleCommand">
             <el-button :key="scope.$row" class="more-btn">
@@ -393,9 +393,6 @@ export default {
 }
 </script>
 <style>
-.server-table {
-  width: 90%;
-}
 .more-btn {
   background: linear-gradient(
     90deg,
