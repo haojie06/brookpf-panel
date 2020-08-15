@@ -9,7 +9,7 @@
           <span style="margin-left: 10px">{{ scope.$index + 1 }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="中转服务器" align="center">
+      <el-table-column label="中转服务器" align="center" min-width="150px">
         <template slot-scope="scope">
           <el-popover trigger="hover" placement="top">
             <p>中转服务器名: {{ scope.row.rname }}</p>
