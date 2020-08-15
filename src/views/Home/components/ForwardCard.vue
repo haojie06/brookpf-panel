@@ -55,7 +55,12 @@
       </el-table-column>
       <el-table-column label="备注" width="150" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.note }}</span>
+          <el-popover trigger="hover" placement="top">
+            <p>{{ scope.row.note }}</p>
+            <div slot="reference" class="name-wrapper">
+              <el-tag>{{ shortenDesc(scope.row.note) }}</el-tag>
+            </div>
+          </el-popover>
         </template>
       </el-table-column>
       <el-table-column label="操作" width="150" align="center">
@@ -98,6 +103,15 @@ export default {
     }
   },
   methods: {
+    shortenDesc(desc) {
+      if (desc.length > 8) {
+        //字符串长度较长，截短显示
+        return desc.substr(0, 8) + '...'
+      } else {
+        //直接返回
+        return desc
+      }
+    },
     stopForward: function(index, row) {
       //停用转发
       console.log('停用转发' + index + JSON.stringify(row))

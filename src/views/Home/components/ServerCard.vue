@@ -96,9 +96,15 @@
           </el-popover>
         </template>
       </el-table-column>
-      <el-table-column label="信息" width="180" align="center">
+      <el-table-column label="备注" width="180" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.Desc }}</span>
+          <!-- 对输出进行裁剪 -->
+          <el-popover trigger="hover" placement="top">
+            <p>{{ scope.row.Desc }}</p>
+            <div slot="reference" class="name-wrapper">
+              <el-tag>{{ shortenDesc(scope.row.Desc) }}</el-tag>
+            </div>
+          </el-popover>
         </template>
       </el-table-column>
       <el-table-column label="操作" width="180" align="center">
@@ -134,10 +140,6 @@
                 "
                 >重启转发</el-dropdown-item
               >
-              <el-dropdown-item
-                :command="beforeHandleCommand(scope.$index, scope.row, 'print')"
-                >查看日志</el-dropdown-item
-              >
             </el-dropdown-menu>
           </el-dropdown>
         </template>
@@ -168,6 +170,15 @@ export default {
       //点击按钮时先保存当前选中服务器信息，之后点击下拉框进行具体操作
 
       return { index, row, command }
+    },
+    shortenDesc(desc) {
+      if (desc.length > 8) {
+        //字符串长度较长，截短显示
+        return desc.substr(0, 8) + '...'
+      } else {
+        //直接返回
+        return desc
+      }
     },
     handleCommand(command) {
       console.log(JSON.stringify(command))
