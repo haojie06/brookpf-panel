@@ -17,7 +17,7 @@
       <el-card class="op-card">
         <div class="op-tip">信息显示</div>
         <el-row>
-          <el-col :span="9" :offset="2">
+          <el-col :span="12">
             <div class="info-panel">
               <div>
                 <span class="panel-num">{{
@@ -28,10 +28,10 @@
                   this.$store.state.infoPanel.totalServers
                 }}</span>
               </div>
-              <div>中转服务器(在线/总共)</div>
+              <div>中转服务器</div>
             </div>
           </el-col>
-          <el-col :span="9" :offset="2">
+          <el-col :span="12">
             <div class="info-panel">
               <div>
                 <span class="panel-num">{{
@@ -42,7 +42,7 @@
                   this.$store.state.infoPanel.totalForwards
                 }}</span>
               </div>
-              <div>中转记录(开启/总共)</div>
+              <div>中转记录</div>
             </div>
           </el-col>
         </el-row>
@@ -182,6 +182,6 @@ export default {
   color: gray;
 }
 .info-panel > div {
-  padding: 0.5rem;
+  padding: 0.45rem;
 }
 </style>
