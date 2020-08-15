@@ -79,7 +79,7 @@ export default {
                       if (ritems.length == 1) {
                         break
                       }
-                      console.log('加工之前的RITEMS\n' + ritems)
+                      // console.log('加工之前的RITEMS\n' + ritems)
                       info.totalForwards =
                         vue.$store.state.infoPanel.totalForwards + 1
                       vue.$store.commit('updateInfoPanel', info)
@@ -131,7 +131,7 @@ export default {
                         forward.totalIn = this.convertBandwdith(
                           Number(bw[1]) + Number(bw[3])
                         )
-                        console.log('转化后的FORWARD' + JSON.stringify(forward))
+                        // console.log('转化后的FORWARD' + JSON.stringify(forward))
                       }
                       forwards.push(forward)
                     }
