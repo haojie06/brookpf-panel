@@ -402,11 +402,23 @@ export default {
   ) !important;
   color: whitesmoke !important;
 }
-.server-card {
-  padding: 1rem 5%;
-  border-radius: 0.5rem !important;
-  border: 1px solid #eaeaea;
-  box-shadow: 0 0 25px #cac6c6;
-  margin-top: 2.5%;
+@media screen and (min-width: 480px) {
+  .server-card {
+    padding: 1rem 2%;
+    border-radius: 0.5rem !important;
+    border: 1px solid #eaeaea;
+    box-shadow: 0 0 25px #cac6c6;
+    margin-top: 2.5%;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .server-card {
+    padding: 1rem 0.5%;
+    border-radius: 0.5rem !important;
+    border: 1px solid #eaeaea;
+    box-shadow: 0 2 05px #cac6c6;
+    margin-top: 2.5%;
+  }
 }
 </style>

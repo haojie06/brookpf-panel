@@ -77,13 +77,11 @@ export default {
   }
 }
 
-@media (max-width: 1199px) {
-  .page-header {
-    background: #fff;
-    position: fixed;
-    width: 100%;
-    z-index: 99;
-    box-shadow: 0 0 1.25rem rgba(31, 45, 61, 0.04);
-  }
+.page-header {
+  background: #fff;
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+  box-shadow: 0 0 1.25rem rgba(31, 45, 61, 0.04);
 }
 </style>
