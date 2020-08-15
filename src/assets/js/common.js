@@ -27,9 +27,9 @@ export default {
             //Brook是否安装
             servers[i].Installed = false
             servers[i].Online = false
-            console.log(
-              '查询到的服务器(来自web端)\n' + JSON.stringify(servers[i])
-            )
+            // console.log(
+            //   '查询到的服务器(来自web端)\n' + JSON.stringify(servers[i])
+            // )
           }
           vue.$store.commit('updateServers', servers)
           //vue.$store.commit()
@@ -51,9 +51,9 @@ export default {
                 .then((response) => {
                   if (response.data.Code == 200) {
                     //成功发送到服务器，并正常回应
-                    console.log(
-                      '查询到的服务器(受控端)\n' + JSON.stringify(response.data)
-                    )
+                    // console.log(
+                    //   '查询到的服务器(受控端)\n' + JSON.stringify(response.data)
+                    // )
                     info.onlineServers =
                       vue.$store.state.infoPanel.onlineServers + 1
                     vue.$store.commit('updateInfoPanel', info)
@@ -131,7 +131,7 @@ export default {
                         forward.totalIn = this.convertBandwdith(
                           Number(bw[1]) + Number(bw[3])
                         )
-                        console.log('转化后的FORWARD' + JSON.stringify(forward))
+                        // console.log('转化后的FORWARD' + JSON.stringify(forward))
                       }
                       forwards.push(forward)
                     }
@@ -149,7 +149,7 @@ export default {
             console.log('服务器列表为空，请先添加中转服务器')
           }
         } else {
-          console.log('查询失败:\n' + JSON.stringify(response))
+          // console.log('查询失败:\n' + JSON.stringify(response))
           vue.$notify({
             title: '失败',
             message: '查询服务器列表失败\n' + JSON.stringify(response),
@@ -158,10 +158,12 @@ export default {
         }
       })
       .catch((err) => {
-        console.log('获取列表出错' + JSON.stringify(err))
+        // console.log('获取列表出错' + JSON.stringify(err))
         vue.$notify({
           title: '错误',
-          message: '获取中转服务器列表失败，请确认网页后端是否正常运行',
+          message:
+            '获取中转服务器列表失败，请确认网页后端是否正常运行\n' +
+            JSON.stringify(err),
           type: 'error',
         })
       })

@@ -28,9 +28,6 @@ export default new Vuex.Store({
       state.login = true
       state.username = payload.username
       state.password = payload.password
-      console.log(
-        `用户登录，提交至store u:${state.username} p:${state.password}`
-      )
     },
     updateInfoPanel(state, info) {
       state.infoPanel.totalServers = info.totalServers
@@ -39,17 +36,17 @@ export default new Vuex.Store({
       state.infoPanel.enableForwards = info.enableForwards
     },
     updateServers(state, servers) {
-      console.log('更新store中的服务器信息')
+      // console.log('更新store中的服务器信息')
       state.servers = servers
     },
     updateForwards(state, forwards) {
-      console.log('更新store中的中转记录信息 更新前')
+      // console.log('更新store中的中转记录信息 更新前')
       state.forwards = forwards
     },
 
     updateAddServerFormVisable(state, visable) {
       //更新表单可见性
-      console.log('更新表单可见性')
+      // console.log('更新表单可见性')
       state.addServerFormVisable = visable
     },
     updateAddForwardFormVisable(state, visable) {

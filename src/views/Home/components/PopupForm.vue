@@ -142,7 +142,6 @@
                 placeholder="选择服务器"
                 style="display: block"
                 value-key="ID"
-                @change="onChange"
               >
                 <el-option
                   v-for="item in servers"
@@ -221,7 +220,6 @@
                 placeholder="选择服务器"
                 style="display: block"
                 value-key="ID"
-                @change="onChange"
               >
                 <el-option
                   v-for="item in servers"
@@ -308,10 +306,7 @@ export default {
     }
   },
   methods: {
-    onChange: function(e) {
-      //console.log('选中' + JSON.stringify(e))
-      //console.log('此时lserver' + JSON.stringify(this.addForwardForm.lserver))
-    },
+    // onChange: function(e) {},
     cancelAddServer: function() {
       //this.addServerFormVisable = true
       this.$store.commit('updateAddServerFormVisable', false)
@@ -403,10 +398,26 @@ export default {
             formData
           )
           .then((r) => {
-            //console.log(JSON.stringify(r.data))
+            if (r.data.Code == 200) {
+              this.$notify({
+                title: '成功',
+                message: '成功提交',
+                type: 'success',
+              })
+            } else {
+              this.$notify({
+                title: '失败',
+                message: '提交中转记录失败 \n ' + JSON.stringify(r.data),
+                type: 'error',
+              })
+            }
           })
           .catch((e) => {
-            //console.log(JSON.stringify(e))
+            this.$notify({
+              title: '失败',
+              message: '提交中转记录失败 \n ' + JSON.stringify(e),
+              type: 'error',
+            })
           })
         this.$store.commit('updateAddForwardFormVisable', false)
         this.$common.getData(this)

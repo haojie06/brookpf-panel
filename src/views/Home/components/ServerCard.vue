@@ -209,7 +209,6 @@ export default {
                   formData
                 )
                 .then((response) => {
-                  //console.log('删除服务器回应:\n' + JSON.stringify(response))
                   if (response.data.Code == 200) {
                     this.$message({
                       type: 'success',
@@ -223,7 +222,6 @@ export default {
                   }
                 })
                 .catch((err) => {
-                  //console.log('删除服务器回应:\n' + JSON.stringify(err))
                   this.$message({
                     type: 'error',
                     message: '删除失败:' + JSON.stringify(err),
