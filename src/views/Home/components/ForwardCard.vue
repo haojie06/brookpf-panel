@@ -114,7 +114,7 @@ export default {
     },
     stopForward: function(index, row) {
       //停用转发
-      console.log('停用转发' + index + JSON.stringify(row))
+      //console.log('停用转发' + index + JSON.stringify(row))
       let formData = new FormData()
       formData.append('Username', row.username)
       formData.append('Password', row.password)
@@ -123,7 +123,7 @@ export default {
       this.$axios
         .post(`http://${row.lhost}:${row.controlport}/api/switchpf`, formData)
         .then((r) => {
-          console.log('切换转发状态\n' + JSON.stringify(r.data))
+          //console.log('切换转发状态\n' + JSON.stringify(r.data))
           if (r.data.Code == 200) {
             this.$notify({
               title: '成功',
@@ -139,7 +139,7 @@ export default {
           }
         })
         .catch((e) => {
-          console.log('停用转发错误\n' + JSON.stringify(e))
+          //console.log('停用转发错误\n' + JSON.stringify(e))
           this.$notify({
             title: '失败',
             message: '停用转发失败' + JSON.stringify(e),
@@ -149,7 +149,7 @@ export default {
       this.$common.getData(this)
     },
     startForward: function(index, row) {
-      console.log('启用转发' + index + JSON.stringify(row))
+      //console.log('启用转发' + index + JSON.stringify(row))
       let formData = new FormData()
       formData.append('Username', row.username)
       formData.append('Password', row.password)
@@ -158,7 +158,7 @@ export default {
       this.$axios
         .post(`http://${row.lhost}:${row.controlport}/api/switchpf`, formData)
         .then((r) => {
-          console.log('切换转发状态\n' + JSON.stringify(r.data))
+          //console.log('切换转发状态\n' + JSON.stringify(r.data))
           if (r.data.Code == 200) {
             this.$notify({
               title: '成功',
@@ -174,7 +174,7 @@ export default {
           }
         })
         .catch((e) => {
-          console.log('启用转发错误\n' + JSON.stringify(e))
+          //console.log('启用转发错误\n' + JSON.stringify(e))
           this.$notify({
             title: '失败',
             message: '启用转发失败' + JSON.stringify(e),
@@ -185,7 +185,7 @@ export default {
     },
     deleteForward: function(index, row) {
       //删除转发
-      console.log('删除转发' + index + JSON.stringify(row))
+      //console.log('删除转发' + index + JSON.stringify(row))
       let formData = new FormData()
       formData.append('Username', row.username)
       formData.append('Password', row.password)
@@ -193,7 +193,7 @@ export default {
       this.$axios
         .post(`http://${row.lhost}:${row.controlport}/api/delpf`, formData)
         .then((r) => {
-          console.log('删除转发\n' + JSON.stringify(r.data))
+          //console.log('删除转发\n' + JSON.stringify(r.data))
           if (r.data.Code == 200) {
             this.$notify({
               title: '成功',
@@ -209,7 +209,7 @@ export default {
           }
         })
         .catch((e) => {
-          console.log('删除转发错误\n' + JSON.stringify(e))
+          //console.log('删除转发错误\n' + JSON.stringify(e))
           this.$notify({
             title: '失败',
             message: '删除转发记录失败' + JSON.stringify(e),

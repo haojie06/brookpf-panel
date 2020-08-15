@@ -181,7 +181,7 @@ export default {
       }
     },
     handleCommand(command) {
-      console.log(JSON.stringify(command))
+      //console.log(JSON.stringify(command))
       //command.row即可取出对象
       //command.command为操作
       let server = command.row
@@ -209,7 +209,7 @@ export default {
                   formData
                 )
                 .then((response) => {
-                  console.log('删除服务器回应:\n' + JSON.stringify(response))
+                  //console.log('删除服务器回应:\n' + JSON.stringify(response))
                   if (response.data.Code == 200) {
                     this.$message({
                       type: 'success',
@@ -223,7 +223,7 @@ export default {
                   }
                 })
                 .catch((err) => {
-                  console.log('删除服务器回应:\n' + JSON.stringify(err))
+                  //console.log('删除服务器回应:\n' + JSON.stringify(err))
                   this.$message({
                     type: 'error',
                     message: '删除失败:' + JSON.stringify(err),
@@ -342,7 +342,7 @@ export default {
       //提交更新
       //检查表单是否填完了
       let compeleted = true
-      console.log('提交更新' + JSON.stringify(this.editServerForm))
+      //console.log('提交更新' + JSON.stringify(this.editServerForm))
       for (let i in this.editServerForm) {
         if (this.editServerForm[i] === '') {
           this.$message({

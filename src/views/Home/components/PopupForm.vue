@@ -309,8 +309,8 @@ export default {
   },
   methods: {
     onChange: function(e) {
-      console.log('选中' + JSON.stringify(e))
-      console.log('此时lserver' + JSON.stringify(this.addForwardForm.lserver))
+      //console.log('选中' + JSON.stringify(e))
+      //console.log('此时lserver' + JSON.stringify(this.addForwardForm.lserver))
     },
     cancelAddServer: function() {
       //this.addServerFormVisable = true
@@ -347,7 +347,7 @@ export default {
         this.$axios
           .post(this.$store.state.webServerUrl + '/web/addserver', formData)
           .then((response) => {
-            console.log('提交表单回应\n' + JSON.stringify(response))
+            //console.log('提交表单回应\n' + JSON.stringify(response))
             if (response.data.Code == 200) {
               this.$notify({
                 title: '成功添加',
@@ -363,7 +363,7 @@ export default {
             }
           })
           .catch((err) => {
-            console.log('提交表单出错\n' + JSON.stringify(err))
+            //console.log('提交表单出错\n' + JSON.stringify(err))
             this.$notify({
               title: '添加失败',
               message: '添加中转服务器失败\n' + JSON.stringify(err),
@@ -377,7 +377,7 @@ export default {
       }
     },
     confirmAddForward: function() {
-      console.log('确认提交中转记录')
+      //console.log('确认提交中转记录')
       //先确定所有的表单都填了
       let completed = true
       let lack = ''
@@ -403,10 +403,10 @@ export default {
             formData
           )
           .then((r) => {
-            console.log(JSON.stringify(r.data))
+            //console.log(JSON.stringify(r.data))
           })
           .catch((e) => {
-            console.log(JSON.stringify(e))
+            //console.log(JSON.stringify(e))
           })
         this.$store.commit('updateAddForwardFormVisable', false)
         this.$common.getData(this)
