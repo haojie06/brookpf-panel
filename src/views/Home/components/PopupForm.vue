@@ -10,13 +10,16 @@
     >
       <el-form :model="addServerForm">
         <el-form-item label="服务器名称" :label-width="formLabelWidth">
-          <el-input v-model="addServerForm.name" autocomplete="off"></el-input>
+          <el-input
+            v-model.trim="addServerForm.name"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
         <el-form-item label="服务器地址" :label-width="formLabelWidth">
           <el-row>
             <el-col :span="14"
               ><el-input
-                v-model="addServerForm.host"
+                v-model.trim="addServerForm.host"
                 autocomplete="off"
                 placeholder="服务器IP"
               ></el-input>
@@ -24,7 +27,7 @@
             <el-col :span="2">:</el-col>
             <el-col :span="8"
               ><el-input
-                v-model="addServerForm.port"
+                v-model.trim="addServerForm.port"
                 autocomplete="off"
                 placeholder="端口"
               ></el-input
@@ -34,24 +37,24 @@
 
         <el-form-item label="服务器用户名" :label-width="formLabelWidth">
           <el-input
-            v-model="addServerForm.username"
+            v-model.trim="addServerForm.username"
             autocomplete="off"
           ></el-input>
         </el-form-item>
         <el-form-item label="服务器密码" :label-width="formLabelWidth">
           <el-input
-            v-model="addServerForm.password"
+            v-model.trim="addServerForm.password"
             autocomplete="off"
           ></el-input>
         </el-form-item>
         <el-form-item
           label="描述"
           :label-width="formLabelWidth"
-          v-model="addServerForm.desc"
+          v-model.trim="addServerForm.desc"
         >
           <el-input
             type="textarea"
-            v-model="addServerForm.desc"
+            v-model.trim="addServerForm.desc"
             autocomplete="off"
           ></el-input>
         </el-form-item>
@@ -72,13 +75,16 @@
     >
       <el-form :model="addServerForm">
         <el-form-item label="服务器名称" :label-width="formLabelWidth">
-          <el-input v-model="addServerForm.name" autocomplete="off"></el-input>
+          <el-input
+            v-model.trim="addServerForm.name"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
         <el-form-item label="服务器地址" :label-width="formLabelWidth">
           <el-row>
             <el-col :span="14"
               ><el-input
-                v-model="addServerForm.host"
+                v-model.trim="addServerForm.host"
                 autocomplete="off"
                 placeholder="服务器IP"
               ></el-input>
@@ -86,7 +92,7 @@
             <el-col :span="2">:</el-col>
             <el-col :span="8"
               ><el-input
-                v-model="addServerForm.port"
+                v-model.trim="addServerForm.port"
                 autocomplete="off"
                 placeholder="端口"
               ></el-input
@@ -96,24 +102,24 @@
 
         <el-form-item label="服务器用户名" :label-width="formLabelWidth">
           <el-input
-            v-model="addServerForm.username"
+            v-model.trim="addServerForm.username"
             autocomplete="off"
           ></el-input>
         </el-form-item>
         <el-form-item label="服务器密码" :label-width="formLabelWidth">
           <el-input
-            v-model="addServerForm.password"
+            v-model.trim="addServerForm.password"
             autocomplete="off"
           ></el-input>
         </el-form-item>
         <el-form-item
           label="描述"
           :label-width="formLabelWidth"
-          v-model="addServerForm.desc"
+          v-model.trim="addServerForm.desc"
         >
           <el-input
             type="textarea"
-            v-model="addServerForm.desc"
+            v-model.trim="addServerForm.desc"
             autocomplete="off"
           ></el-input>
         </el-form-item>
@@ -132,13 +138,16 @@
     >
       <el-form :model="addServerForm">
         <el-form-item label="中转名称" :label-width="formLabelWidth">
-          <el-input v-model="addForwardForm.name" autocomplete="off"></el-input>
+          <el-input
+            v-model.trim="addForwardForm.name"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
         <el-form-item label="中转服务器" :label-width="formLabelWidth">
           <el-row>
             <el-col :span="14">
               <el-select
-                v-model="addForwardForm.lserver"
+                v-model.trim="addForwardForm.lserver"
                 placeholder="选择服务器"
                 style="display: block"
                 value-key="ID"
@@ -160,7 +169,7 @@
             <el-col :span="2">:</el-col>
             <el-col :span="8">
               <el-input
-                v-model="addForwardForm.lport"
+                v-model.trim="addForwardForm.lport"
                 autocomplete="off"
                 placeholder="端口"
               ></el-input>
@@ -171,7 +180,7 @@
           <el-row>
             <el-col :span="14"
               ><el-input
-                v-model="addForwardForm.host"
+                v-model.trim="addForwardForm.host"
                 autocomplete="off"
                 placeholder="被中转服务器IP"
               ></el-input>
@@ -179,7 +188,7 @@
             <el-col :span="2">:</el-col>
             <el-col :span="8"
               ><el-input
-                v-model="addForwardForm.rport"
+                v-model.trim="addForwardForm.rport"
                 autocomplete="off"
                 placeholder="端口"
               ></el-input
@@ -190,7 +199,7 @@
           <el-input
             type="textarea"
             autocomplete="off"
-            v-model="addForwardForm.desc"
+            v-model.trim="addForwardForm.desc"
           ></el-input>
         </el-form-item>
       </el-form>
@@ -210,13 +219,16 @@
     >
       <el-form :model="addServerForm">
         <el-form-item label="中转名称" :label-width="formLabelWidth">
-          <el-input v-model="addForwardForm.name" autocomplete="off"></el-input>
+          <el-input
+            v-model.trim="addForwardForm.name"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
         <el-form-item label="中转服务器" :label-width="formLabelWidth">
           <el-row>
             <el-col :span="14">
               <el-select
-                v-model="addForwardForm.lserver"
+                v-model.trim="addForwardForm.lserver"
                 placeholder="选择服务器"
                 style="display: block"
                 value-key="ID"
@@ -238,7 +250,7 @@
             <el-col :span="2">:</el-col>
             <el-col :span="8">
               <el-input
-                v-model="addForwardForm.lport"
+                v-model.trim="addForwardForm.lport"
                 autocomplete="off"
                 placeholder="端口"
               ></el-input>
@@ -249,7 +261,7 @@
           <el-row>
             <el-col :span="14"
               ><el-input
-                v-model="addForwardForm.host"
+                v-model.trim="addForwardForm.host"
                 autocomplete="off"
                 placeholder="被中转服务器IP"
               ></el-input>
@@ -257,7 +269,7 @@
             <el-col :span="2">:</el-col>
             <el-col :span="8"
               ><el-input
-                v-model="addForwardForm.rport"
+                v-model.trim="addForwardForm.rport"
                 autocomplete="off"
                 placeholder="端口"
               ></el-input
@@ -268,7 +280,7 @@
           <el-input
             type="textarea"
             autocomplete="off"
-            v-model="addForwardForm.desc"
+            v-model.trim="addForwardForm.desc"
           ></el-input>
         </el-form-item>
       </el-form>

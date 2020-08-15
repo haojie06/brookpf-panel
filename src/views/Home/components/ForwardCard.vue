@@ -3,13 +3,13 @@
   <el-card class="forward-card">
     <el-divider content-position="left">中转记录列表</el-divider>
     <el-table :data="forwards" style="width: 100%">
-      <el-table-column label="#" width="80" align="center">
+      <el-table-column label="#" align="center">
         <template slot-scope="scope">
           <i class="el-icon-d-arrow-right"></i>
           <span style="margin-left: 10px">{{ scope.$index + 1 }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="中转服务器" width="130" align="center">
+      <el-table-column label="中转服务器" align="center">
         <template slot-scope="scope">
           <el-popover trigger="hover" placement="top">
             <p>中转服务器名: {{ scope.row.rname }}</p>
@@ -20,23 +20,23 @@
           </el-popover>
         </template>
       </el-table-column>
-      <el-table-column label="服务器地址/本地端口" width="170" align="center">
+      <el-table-column label="服务器地址/本地端口" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.lhost }}:{{ scope.row.lport }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="被转发地址/远程端口" width="170" align="center">
+      <el-table-column label="被转发地址/远程端口" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.rhost }}:{{ scope.row.rport }}</span>
         </template></el-table-column
       >
-      <el-table-column label="状态" width="90" align="center">
+      <el-table-column label="状态" align="center">
         <template slot-scope="scope">
           <el-tag type="success" v-if="scope.row.enable">开启</el-tag>
           <el-tag type="danger" v-if="!scope.row.enable">停止</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="流量(上传/下载)" width="140" align="center">
+      <el-table-column label="流量(上传/下载)" align="center">
         <template slot-scope="scope">
           <el-popover trigger="hover" placement="top">
             <p>
@@ -53,7 +53,7 @@
           </el-popover>
         </template>
       </el-table-column>
-      <el-table-column label="备注" width="150" align="center">
+      <el-table-column label="备注" align="center">
         <template slot-scope="scope">
           <el-popover trigger="hover" placement="top">
             <p>{{ scope.row.note }}</p>
@@ -63,7 +63,7 @@
           </el-popover>
         </template>
       </el-table-column>
-      <el-table-column label="操作" width="150" align="center">
+      <el-table-column label="操作" align="center">
         <template slot-scope="scope">
           <el-button
             size="mini"

@@ -75,11 +75,11 @@ export default {
                     for (let index in records) {
                       // 这了先用&来划分，尝试获取流量统计 datas[1]是流量部分 tcp入 tcp出 udp入 udp出
                       let datas = records[index].split('&')
-                      let ritems = datas[0].split(' ')
+                      let ritems = datas[0].trim().split(' ')
                       if (ritems.length == 1) {
                         break
                       }
-
+                      console.log('加工之前的RITEMS\n' + ritems)
                       info.totalForwards =
                         vue.$store.state.infoPanel.totalForwards + 1
                       vue.$store.commit('updateInfoPanel', info)
@@ -131,7 +131,7 @@ export default {
                         forward.totalIn = this.convertBandwdith(
                           Number(bw[1]) + Number(bw[3])
                         )
-                        // console.log('转化后的FORWARD' + JSON.stringify(forward))
+                        console.log('转化后的FORWARD' + JSON.stringify(forward))
                       }
                       forwards.push(forward)
                     }

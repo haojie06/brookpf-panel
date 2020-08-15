@@ -6,6 +6,7 @@
         status-icon
         label-position="left"
         label-width="0px"
+        @keyup.enter.native="login"
       >
         <h3 class="login-title">Brook面板登陆</h3>
         <el-form-item required>

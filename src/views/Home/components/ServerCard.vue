@@ -11,7 +11,7 @@
           <el-row>
             <el-col :span="14"
               ><el-input
-                v-model="editServerForm.IP"
+                v-model.trim="editServerForm.IP"
                 autocomplete="off"
                 placeholder="服务器IP"
               ></el-input>
@@ -19,7 +19,7 @@
             <el-col :span="2">:</el-col>
             <el-col :span="8"
               ><el-input
-                v-model="editServerForm.Port"
+                v-model.trim="editServerForm.Port"
                 autocomplete="off"
                 placeholder="端口"
               ></el-input
@@ -29,20 +29,20 @@
 
         <el-form-item label="服务器用户名" :label-width="formLabelWidth">
           <el-input
-            v-model="editServerForm.UserName"
+            v-model.trim="editServerForm.UserName"
             autocomplete="off"
           ></el-input>
         </el-form-item>
         <el-form-item label="服务器密码" :label-width="formLabelWidth">
           <el-input
-            v-model="editServerForm.Password"
+            v-model.trim="editServerForm.Password"
             autocomplete="off"
           ></el-input>
         </el-form-item>
         <el-form-item label="描述" :label-width="formLabelWidth">
           <el-input
             type="textarea"
-            v-model="editServerForm.Desc"
+            v-model.trim="editServerForm.Desc"
             autocomplete="off"
           ></el-input>
         </el-form-item>
@@ -55,23 +55,23 @@
     <!--中转服务器表格-->
     <el-divider content-position="left">中转服务器列表</el-divider>
     <el-table :data="servers" class="server-table">
-      <el-table-column label="ID" width="120" align="center">
+      <el-table-column label="ID" align="center">
         <template slot-scope="scope">
           <i class="el-icon-arrow-right"></i>
           <span style="margin-left: 10px">{{ scope.row.ID }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="服务器名" width="180" align="center">
+      <el-table-column label="服务器名" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.Name }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="中转服务器地址" width="210" align="center">
+      <el-table-column label="中转服务器地址" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.IP }}:{{ scope.row.Port }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="状态" width="100" align="center">
+      <el-table-column label="状态" align="center">
         <template slot-scope="scope">
           <el-popover trigger="hover" placement="top">
             <p>Brook是否安装: {{ scope.row.Installed }}</p>
@@ -96,7 +96,7 @@
           </el-popover>
         </template>
       </el-table-column>
-      <el-table-column label="备注" width="180" align="center">
+      <el-table-column label="备注" align="center">
         <template slot-scope="scope">
           <!-- 对输出进行裁剪 -->
           <el-popover trigger="hover" placement="top">
@@ -107,7 +107,7 @@
           </el-popover>
         </template>
       </el-table-column>
-      <el-table-column label="操作" width="180" align="center">
+      <el-table-column label="操作" align="center">
         <template slot-scope="scope">
           <el-dropdown @command="handleCommand">
             <el-button :key="scope.$row" class="more-btn">
@@ -394,7 +394,7 @@ export default {
 </script>
 <style>
 .server-table {
-  with: 90%;
+  width: 90%;
 }
 .more-btn {
   background: linear-gradient(
