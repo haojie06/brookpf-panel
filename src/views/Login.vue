@@ -39,10 +39,12 @@
 </template>
 
 <script>
+import Config from '../../public/config.json'
 export default {
   name: 'Login',
   data() {
     return {
+      Config,
       loginForm: {
         username: '',
         password: '',
@@ -89,6 +91,11 @@ export default {
           })
         })
     },
+  },
+  created: function() {
+    //读取
+    // console.log('读取JSON' + Config.webserverUrl)
+    this.$store.commit('changeServerUrl', Config.webserverUrl)
   },
 }
 </script>

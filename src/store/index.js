@@ -24,6 +24,10 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    changeServerUrl(state, url) {
+      // console.log('读取修改URL' + url)
+      state.webServerUrl = url
+    },
     login(state, payload) {
       state.login = true
       state.username = payload.username

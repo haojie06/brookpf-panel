@@ -44,7 +44,7 @@
           <el-tag type="danger" v-if="!scope.row.enable">停止</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="流量(上传/下载)" align="center" min-width="120px">
+      <el-table-column label="流量(上传/下载)" align="center" min-width="150px">
         <template slot-scope="scope">
           <el-popover trigger="hover" placement="top">
             <p>

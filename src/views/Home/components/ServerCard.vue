@@ -39,7 +39,7 @@
             autocomplete="off"
           ></el-input>
         </el-form-item>
-        <el-form-item label="描述" :label-width="formLabelWidth">
+        <el-form-item label="备注" :label-width="formLabelWidth">
           <el-input
             type="textarea"
             v-model.trim="editServerForm.Desc"
