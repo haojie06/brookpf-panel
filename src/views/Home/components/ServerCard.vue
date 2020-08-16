@@ -77,9 +77,12 @@
             <p>Brook是否安装: {{ scope.row.Installed }}</p>
             <p>Brook是否开启: {{ scope.row.BStatus }}</p>
             <div slot="reference" class="name-wrapper">
-              <el-tag size="medium" type="success" v-if="scope.row.Online">{{
-                scope.row.Status
-              }}</el-tag>
+              <el-tag
+                size="medium"
+                type="success"
+                v-if="scope.row.Status == '在线'"
+                >{{ scope.row.Status }}</el-tag
+              >
               <el-tag
                 size="medium"
                 type="info"
@@ -90,6 +93,12 @@
                 size="medium"
                 type="danger"
                 v-if="scope.row.Status == '离线'"
+                >{{ scope.row.Status }}</el-tag
+              >
+              <el-tag
+                size="medium"
+                type="warning"
+                v-if="scope.row.Status == '授权失败'"
                 >{{ scope.row.Status }}</el-tag
               >
             </div>

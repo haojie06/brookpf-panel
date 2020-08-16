@@ -136,6 +136,10 @@ export default {
                       forwards.push(forward)
                     }
                     vue.$store.commit('updateForwards', forwards)
+                  } else if (response.data.Code == 401) {
+                    //授权失败
+                    servers[i].Status = '授权失败'
+                    vue.$store.commit('updateServers', servers)
                   }
                 })
                 .catch(() => {
